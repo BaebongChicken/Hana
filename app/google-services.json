@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "826421433110",
+    "firebase_url": "https://projecthana-f37ad.firebaseio.com",
+    "project_id": "projecthana-f37ad",
+    "storage_bucket": "projecthana-f37ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826421433110:android:20c80b4bdc9e84e6",
+        "android_client_info": {
+          "package_name": "com.example.hana.hana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826421433110-o0gdu50obeqgcgheu7tcbkjhni1n7dqa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hana.hana",
+            "certificate_hash": "58129D102E817B5A49CE378F780AFF5692FF2EC8"
+          }
+        },
+        {
+          "client_id": "826421433110-gs4di1b4ro6hg29j1k9serf0eriv2anj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF62vR36zuXQkldLsXTANH2G2eTR20BFo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826421433110-gs4di1b4ro6hg29j1k9serf0eriv2anj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
