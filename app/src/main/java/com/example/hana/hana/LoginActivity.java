@@ -134,6 +134,7 @@ public class LoginActivity extends BaseActivity {
                                 imageLoader.displayImage(user_thumbnail_url.toString(), user_thumbnail);
 
                             } catch (Exception e) {
+                                Log.e("jinhee","error");
 
                                 Log.e("jinhee","error");
                             }
