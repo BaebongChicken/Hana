@@ -1,5 +1,9 @@
 package com.example.hana.hana.Data;
 
+import android.content.ContentValues;
+
+import com.example.hana.hana.DataBase.HanaDatabase;
+
 /**
  * Created by JinHee on 2016-11-14.
  */
@@ -21,6 +25,16 @@ public class ActBranch {
         this.actBranchData[1] = actBranchName;
         this.actBranchData[2] = teamId;
 
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+
+        for (int i = 0; i < actBranchData.length; i++) {
+            values.put(HanaDatabase.ActBranchTable.getColumnNames()[i], actBranchData[i]);
+        }
+
+        return values;
     }
 
     public String[] getActBranchData() {

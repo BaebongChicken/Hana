@@ -21,7 +21,7 @@ public class HanaDatabase {
         public static final String COL_HANA_ID              = "hanaId";
         public static final String COL_LEVEL                = "level";
 
-        public String[] getColumnNames() {
+        public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
                             COL_USER_ID, COL_USER_NAME, COL_USER_PHONE,
@@ -47,7 +47,7 @@ public class HanaDatabase {
         public static final String COL_ALBUMBR_ID           = "albumBranchId";
 
 
-        public String[] getColumnNames() {
+        public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
                             COL_HANA_ID,
@@ -73,7 +73,7 @@ public class HanaDatabase {
         public static final String COL_TEAM_ID              = "teamId";
 
 
-        public String[] getColumnNames() {
+        public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
                             COL_ACTBR_ID,
@@ -94,7 +94,7 @@ public class HanaDatabase {
         public static final String COL_TEAMTDD_ID           = "teamTddId";
 
 
-        public String[] getColumnNames() {
+        public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
                             COL_TEAM_ID,
@@ -116,7 +116,7 @@ public class HanaDatabase {
         public static final String COL_COMMENTS_ID_             = "commentsId";
 
 
-        public String[] getColumnNames() {
+        public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
                             COL_TEAMTDD_ID,
@@ -138,7 +138,7 @@ public class HanaDatabase {
 
 
 
-        public String[] getColumnNames() {
+        public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
                            COL_COMMENT_ID,

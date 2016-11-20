@@ -1,5 +1,9 @@
 package com.example.hana.hana.Data;
 
+import android.content.ContentValues;
+
+import com.example.hana.hana.DataBase.HanaDatabase;
+
 /**
  * Created by JinHee on 2016-11-07.
  */
@@ -28,15 +32,38 @@ public class User {
         this.userData[5] = level;
     }
 
-    public String[] getUser(){
+    @Override
+    public String toString() {
+        return "USER [userId="
+                + String.valueOf(userData[0])
+                + ", userName=" + String.valueOf(userData[1])
+                + ", userPhone=" + String.valueOf(userData[2])
+                + ", userThumbnailURL=" + String.valueOf(userData[3])
+                + ", hanaId=" + String.valueOf(userData[4])
+                + ", level=" + String.valueOf(userData[5])
+                + "]";
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+
+        for (int i = 0; i < userData.length; i++) {
+            values.put(HanaDatabase.UserTable.getColumnNames()[i], userData[i]);
+        }
+
+        return values;
+    }
+
+    public String[] getUser() {
         return this.userData;
     }
 
-    public String getUser(int idx){
+    public String getUser(int idx) {
         return this.userData[idx];
     }
 
-    public void setUserData(String[] userData){
+    public void setUserData(String[] userData) {
         this.userData = userData;
     }
+
 }

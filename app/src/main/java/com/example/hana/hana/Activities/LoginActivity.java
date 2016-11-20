@@ -1,4 +1,4 @@
-package com.example.hana.hana;
+package com.example.hana.hana.Activities;
 
 import android.content.Intent;
 
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.hana.hana.Activities.BaseActivity;
 import com.example.hana.hana.Data.User;
+import com.example.hana.hana.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

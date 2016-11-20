@@ -1,5 +1,9 @@
 package com.example.hana.hana.Data;
 
+import android.content.ContentValues;
+
+import com.example.hana.hana.DataBase.HanaDatabase;
+
 /**
  * Created by JinHee on 2016-11-14.
  */
@@ -22,7 +26,15 @@ public class Comment {
         commentData[1] = content;
 
     }
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
 
+        for (int i = 0; i < commentData.length; i++) {
+            values.put(HanaDatabase.CommentsTable.getColumnNames()[i], commentData[i]);
+        }
+
+        return values;
+    }
     public String[] getCommentData() {
         return commentData;
     }

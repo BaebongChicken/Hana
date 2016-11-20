@@ -1,5 +1,9 @@
 package com.example.hana.hana.Data;
 
+import android.content.ContentValues;
+
+import com.example.hana.hana.DataBase.HanaDatabase;
+
 /**
  * Created by JinHee on 2016-11-14.
  */
@@ -23,6 +27,15 @@ public class Team {
 
     }
 
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+
+        for (int i = 0; i < teamData.length; i++) {
+            values.put(HanaDatabase.TeamTable.getColumnNames()[i], teamData[i]);
+        }
+
+        return values;
+    }
     public String[] getTeamData() {
         return teamData;
     }
