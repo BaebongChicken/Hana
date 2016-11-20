@@ -1,15 +1,13 @@
 package com.example.hana.hana.Activities;
 
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-
+import com.example.hana.hana.Constants.Constants;
 import com.example.hana.hana.Data.User;
+import com.example.hana.hana.DataBase.HanaSQLiteOpenHelper;
 import com.example.hana.hana.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -26,19 +24,19 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.Arrays;
 
 
 public class LoginActivity extends BaseActivity {
 
     CallbackManager callbackManager;
-    TextView name;
-    TextView email;
-    String user_id = "";
-    URL user_thumbnail_url = null;
-    ImageView user_thumbnail;
-
+    //    TextView nameTextView;
+//    TextView email;
+//    String user_id = "";
+//    URL user_thumbnail_url = null;
+//    ImageView user_thumbnail;
+    String[] userLoginData;
+    HanaSQLiteOpenHelper hanaDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +46,15 @@ public class LoginActivity extends BaseActivity {
         // [START initialize_auth]
         // Initialize Firebase Auth
 
+        hanaDb = new HanaSQLiteOpenHelper(getApplicationContext());
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
 
         setContentView(R.layout.activity_login);
-        name = (TextView) findViewById(R.id.textview1);
-        email = (TextView) findViewById(R.id.textview2);
-        user_thumbnail = (ImageView) findViewById(R.id.thumbnail);
+//        nameTextView = (TextView) findViewById(R.id.textview1);
+//        email = (TextView) findViewById(R.id.textview2);
+//        user_thumbnail = (ImageView) findViewById(R.id.thumbnail);
         callbackManager = CallbackManager.Factory.create();
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
 
@@ -70,9 +69,9 @@ public class LoginActivity extends BaseActivity {
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
-
-                        Log.i("JinHee", "User ID: " + loginResult.getAccessToken().getUserId());
-                        Log.i("JinHee", "Auth Token: " + loginResult.getAccessToken().getToken());
+                        Log.i(Constants.LOG_TAG, "Facebook Login Success");
+//                        Log.i("JinHee", "User ID: " + loginResult.getAccessToken().getUserId());
+//                        Log.i("JinHee", "Auth Token: " + loginResult.getAccessToken().getToken());
                         submit(loginResult);
 
                     }
@@ -109,7 +108,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    private void addNewUser(String userId, String userName, String userPhone, String userThumbnailURL,String hanaId,String level){
+    private void addNewUser(String userId, String userName, String userPhone, String userThumbnailURL, String hanaId, String level) {
         User user = new User(userId, userName, userPhone, userThumbnailURL, hanaId, level);
     }
 
@@ -124,23 +123,24 @@ public class LoginActivity extends BaseActivity {
                             Log.d("GraphResponse", object.toString());
                             try {
 
-                                name.setText(object.getString("name"));
-                                email.setText(object.getString("email"));
-                                user_id = object.getString("id");
+//                                nameTextView.setText(object.getString("name"));
+//                                email.setText(object.getString("email"));
+//                                user_id = object.getString("id");
 
-                                ImageLoader imageLoader = ImageLoader.getInstance();
+//                                ImageLoader imageLoader = ImageLoader.getInstance();
 
-                                user_thumbnail_url = new URL("https://graph.facebook.com/" + user_id + "/picture?type=normal");
-                                imageLoader.displayImage(user_thumbnail_url.toString(), user_thumbnail);
+//                                user_thumbnail_url = new URL("https://graph.facebook.com/" + user_id + "/picture?type=normal");
+//                                imageLoader.displayImage(user_thumbnail_url.toString(), user_thumbnail);
+
+
 
                             } catch (Exception e) {
-                                Log.e("jinhee","error");
+                                Log.e("jinhee", "error");
 
-                                Log.e("jinhee","error");
                             }
 
                         } catch (Exception e) {
-                            Log.e("jinhee","error");
+                            Log.e("jinhee", "error");
 
                         }
                     }

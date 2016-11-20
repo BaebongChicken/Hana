@@ -1,9 +1,7 @@
 package com.example.hana.hana.DataBase;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import com.example.hana.hana.Constants.Constants;
@@ -13,9 +11,6 @@ import com.example.hana.hana.Data.Hana;
 import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.Data.TeamTDD;
 import com.example.hana.hana.Data.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Jin Hee Lee on 2016-11-20.
@@ -145,24 +140,24 @@ public class DataHandling {
 
     }
 
-    public List<User> getListUser() {
-        Cursor c = null;
-        ArrayList<User> ret = null;
-        String sql = "SELECT * FROM " + HanaDatabase.UserTable.TABLE_NAME + " ORDER BY 1";
-        try {
-            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
-            c = db.get(sql);
-            //db.logCursorInfo(c);
-          //  ret = setBindCursor(c);
-        } catch (SQLiteException e) {
-            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
-        } finally {
-            if (c != null && c.isClosed()) {
-                c.close();
-            }
-        }
-        return ret;
-    }
+//    public List<User> getListUser() {
+//        Cursor c = null;
+//        ArrayList<User> ret = null;
+//        String sql = "SELECT * FROM " + HanaDatabase.UserTable.TABLE_NAME + " ORDER BY 1";
+//        try {
+//            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+//            c = db.get(sql);
+//            //db.logCursorInfo(c);
+//          //  ret = setBindCursor(c);
+//        } catch (SQLiteException e) {
+//            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+//        } finally {
+//            if (c != null && c.isClosed()) {
+//                c.close();
+//            }
+//        }
+//        return ret;
+//    }
 
 
 }

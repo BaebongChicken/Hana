@@ -2,7 +2,7 @@
     <string name="app_name">Hana</string>
     <string name="keyhash_a"></string>
     <!--facebook-->
-    <string name = "facebook_app_id">202941196782846</string>
+    <string name="facebook_app_id">202941196782846</string>
     <!--LoginActivity-->
     <string name="fblogin">Login with facebook</string>
 
