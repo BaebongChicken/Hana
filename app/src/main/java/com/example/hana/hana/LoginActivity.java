@@ -2,9 +2,6 @@ package com.example.hana.hana;
 
 import android.content.Intent;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +10,7 @@ import android.widget.TextView;
 
 
 import com.example.hana.hana.Activities.BaseActivity;
-import com.example.hana.hana.Data.UserData;
+import com.example.hana.hana.Data.User;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -24,18 +21,12 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.google.firebase.*;
 
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Arrays;
 
 
@@ -47,8 +38,6 @@ public class LoginActivity extends BaseActivity {
     String user_id = "";
     URL user_thumbnail_url = null;
     ImageView user_thumbnail;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
 
 
     @Override
@@ -58,8 +47,7 @@ public class LoginActivity extends BaseActivity {
 
         // [START initialize_auth]
         // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
@@ -121,9 +109,8 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    private void addNewUser(String userId, String userName, String userPhone, String userThumbnailURL){
-        UserData userData = new UserData(userId, userName, userPhone, userThumbnailURL);
-        mDatabase.child("users").child(userId).setValue(userData);
+    private void addNewUser(String userId, String userName, String userPhone, String userThumbnailURL,String hanaId,String level){
+        User user = new User(userId, userName, userPhone, userThumbnailURL, hanaId, level);
     }
 
     private void submit(final LoginResult loginResult) {
@@ -147,11 +134,14 @@ public class LoginActivity extends BaseActivity {
                                 imageLoader.displayImage(user_thumbnail_url.toString(), user_thumbnail);
 
                             } catch (Exception e) {
+                                Log.e("jinhee","error");
 
-
+                                Log.e("jinhee","error");
                             }
 
                         } catch (Exception e) {
+                            Log.e("jinhee","error");
+
                         }
                     }
                 }
