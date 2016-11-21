@@ -19,12 +19,12 @@ public class TeamTDD {
     public TeamTDD(String teamTddId,
                    String content,
                    String state,
-                   String commentsId){
+                   String teamId){
         teamTddData = new String[DATA_COUNT];
         teamTddData[0] = teamTddId;
         teamTddData[1] = content;
         teamTddData[2] = state;
-        teamTddData[3] = commentsId;
+        teamTddData[3] = teamId;
 
     }
     public ContentValues getContentValues() {

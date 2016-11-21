@@ -5,6 +5,7 @@ package com.example.hana.hana.DataBase;
  * Created by Jin Hee Lee on 2016-11-20.
  */
 
+import com.example.hana.hana.Data.User;
 import com.example.hana.hana.DataBase.HanaDatabase.*;
 
 public class HanaDataBaseCreator implements DataBaseCreator {
@@ -18,8 +19,9 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             + UserTable.COL_USER_NAME + " TEXT,"
             + UserTable.COL_USER_PHONE + " TEXT,"
             + UserTable.COL_USER_THUMBNAIL_URL + " TEXT,"
-            + UserTable.COL_HANA_ID + " INTEGER,"
-            + UserTable.COL_LEVEL + " TEXT);";
+            + UserTable.COL_HANA_ID + " TEXT,"
+            + UserTable.COL_LEVEL + " TEXT);"
+;
 
     private final String INDEX_CREATE_USER_TABLE = "CREATE UNIQUE INDEX"
             + UserTable.TABLE_NAME + "_pk ON "
@@ -31,15 +33,12 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             HanaTable.TABLE_NAME + "("
             + HanaTable.COL_HANA_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + HanaTable.COL_HANA_NAME + " TEXT,"
-            + HanaTable.COL_HANA_THUMBNAIL + " TEXT,"
-            + HanaTable.COL_HANA_NOTICE + " TEXT,"
-            + HanaTable.COL_HANA_MEMBER_COUNT + " INTEGER,"
-            + HanaTable.COL_ACTBR_ID + " INTEGER);";
+            + HanaTable.COL_HANA_THUMBNAIL + " TEXT);";
 
     private final String INDEX_CREATE_HANA_TABLE = "CREATE UNIQUE INDEX"
             + HanaTable.TABLE_NAME + "_pk ON "
             + HanaTable.TABLE_NAME + " (" + UserTable.COL_USER_ID + ");";
-//    //
+    //    //
 //    //ACTBRANCH
 //    //
 //    private final String TABLE_CREATE_ACT_BRANCH_TABLE = "CREATE TABLE" +
@@ -58,7 +57,7 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             TeamTable.TABLE_NAME + "("
             + TeamTable.COL_TEAM_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + TeamTable.COL_TEAM_NAME + " TEXT,"
-            + TeamTable.COL_TEAMTDD_ID + " INTEGER);";
+            + TeamTable.COL_HANA_ID + " INTEGER);";
 
     private final String INDEX_CREATE_TEAM_TABLE = "CREATE UNIQUE INDEX"
             + TeamTable.TABLE_NAME + "_pk ON "
@@ -71,7 +70,7 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             + TeamTDDTable.COL_TEAMTDD_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + TeamTDDTable.COL_TEAMTDD_CONTENT + " TEXT,"
             + TeamTDDTable.COL_TEAMTDD_STATE + " INTEGER,"
-            + TeamTDDTable.COL_COMMENTS_ID_ + " INTEGER);";
+            + TeamTDDTable.COL_TEAM_ID + " INTEGER);";
 
     private final String INDEX_CREATE_TEAM_TDD_TABLE = "CREATE UNIQUE INDEX"
             + TeamTDDTable.TABLE_NAME + "_pk ON "
@@ -135,8 +134,12 @@ public class HanaDataBaseCreator implements DataBaseCreator {
                 {"4", "개문녕", "01012355882", null, "1", "Member"},
         };
         String[][] initHanaValues = {
-                {"0", "소프트웨어실습", null, "테스트", "2", null, null},
-                {"1", "컴퓨터네트워크", null, "컴네^^", "1", null, null}
+                {
+                        "0", "소프트웨어실습", null
+                },
+                {
+                        "1", "컴퓨터네트워크", null
+                }
         };
 
         String[] initData = new String[initUserValues.length + initHanaValues.length];

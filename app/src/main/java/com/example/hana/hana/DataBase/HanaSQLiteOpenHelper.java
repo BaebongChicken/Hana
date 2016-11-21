@@ -58,7 +58,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
                 Log.d(Constants.LOG_TAG, "Creating or Opening the database (" + DataBaseCreator.DB_NAME + ").");
                 db = mInstance.getWritableDatabase();
             } catch (SQLiteException e) {
-                Log.e(Constants.LOG_TAG, "Could not create and/or Onpen the database (" + DataBaseCreator.DB_NAME +
+                Log.e(Constants.LOG_TAG, "Could not create and/or Open the database (" + DataBaseCreator.DB_NAME +
                         ") that will be used for reading and writing.");
             }
             Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + "instance of databse (" + DataBaseCreator.DB_NAME + ") created.");
@@ -253,6 +253,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME+" - onUpgrade() : Table Upgrade Action");
-
+        db.execSQL("DROP TABLE IF EXTISTS data");
+        onCreate(db);
     }
 }

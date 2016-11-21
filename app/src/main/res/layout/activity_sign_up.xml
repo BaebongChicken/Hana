@@ -7,68 +7,86 @@
     android:layout_height="match_parent"
     tools:context="com.example.hana.hana.Activities.SignUpActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/signupTxt1"
-
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="User ID" />
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/signupTxt2"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0">
 
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="User Name" />
+                <EditText
+                    android:id="@+id/signupTxt1"
 
-        <EditText
-            android:id="@+id/signupTxt3"
+                    android:layout_width="match_parent"
+                    android:hint="User ID"
+                    android:layout_height="100dp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="User Phone" />
+                <EditText
+                    android:id="@+id/signupTxt2"
 
-        <EditText
-            android:id="@+id/signupTxt4"
+                    android:layout_width="match_parent"
+                    android:hint="User Name"
+                    android:layout_height="100dp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="User Thumbnail URL" />
+                <EditText
+                    android:id="@+id/signupTxt3"
 
-        <EditText
-            android:id="@+id/signupTxt5"
+                    android:layout_width="match_parent"
+                    android:hint="User Phone"
+                    android:layout_height="100dp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="User HanaId" />
+                <EditText
+                    android:id="@+id/signupTxt4"
 
-        <EditText
-            android:id="@+id/signupTxt6"
+                    android:layout_width="match_parent"
+                    android:hint="User Thumbnail URL"
+                    android:layout_height="100dp" />
 
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="User Level" />
+                <EditText
+                    android:id="@+id/signupTxt5"
 
-        <ImageView
+                    android:layout_width="match_parent"
+                    android:hint="User Level"
+                    android:layout_height="100dp" />
 
-            android:id="@+id/signupImgView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#123542"
-            android:scaleType="center"
-            app:srcCompat="@drawable/com_facebook_close" />
+                <EditText
+                    android:id="@+id/signupTxt6"
 
-    </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:hint="User HanaId"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0">
+
+                <Button
+                    android:text="추가"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/addBtn" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/signuplv" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
 </RelativeLayout>

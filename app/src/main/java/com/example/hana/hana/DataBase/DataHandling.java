@@ -5,8 +5,7 @@ import android.database.SQLException;
 import android.util.Log;
 
 import com.example.hana.hana.Constants.Constants;
-import com.example.hana.hana.Data.ActBranch;
-import com.example.hana.hana.Data.Comment;
+
 import com.example.hana.hana.Data.Hana;
 import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.Data.TeamTDD;
@@ -41,12 +40,12 @@ public class DataHandling {
         long rowId = db.insert(HanaDatabase.HanaTable.TABLE_NAME, data.getContentValues());
         if (rowId < 0) throw new SQLException("FAIL at Insert");
     }
-
-    public void insert(final ActBranch data) {
-        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + data.toString());
-        long rowId = db.insert(HanaDatabase.ActBranchTable.TABLE_NAME, data.getContentValues());
-        if (rowId < 0) throw new SQLException("FAIL at Insert");
-    }
+//
+//    public void insert(final ActBranch data) {
+//        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + data.toString());
+//        long rowId = db.insert(HanaDatabase.ActBranchTable.TABLE_NAME, data.getContentValues());
+//        if (rowId < 0) throw new SQLException("FAIL at Insert");
+//    }
 
     public void insert(final Team data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + data.toString());
@@ -59,12 +58,12 @@ public class DataHandling {
         long rowId = db.insert(HanaDatabase.TeamTDDTable.TABLE_NAME, data.getContentValues());
         if (rowId < 0) throw new SQLException("FAIL at Insert");
     }
-
-    public void insert(final Comment data) {
-        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + data.toString());
-        long rowId = db.insert(HanaDatabase.CommentsTable.TABLE_NAME, data.getContentValues());
-        if (rowId < 0) throw new SQLException("FAIL at Insert");
-    }
+//
+//    public void insert(final Comment data) {
+//        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + data.toString());
+//        long rowId = db.insert(HanaDatabase.CommentsTable.TABLE_NAME, data.getContentValues());
+//        if (rowId < 0) throw new SQLException("FAIL at Insert");
+//    }
 
     //update
 
@@ -78,12 +77,12 @@ public class DataHandling {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
         db.update(HanaDatabase.HanaTable.TABLE_NAME, data.getContentValues(), data.getHanaData(0));
     }
-
-    public void update(final ActBranch data) {
-        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
-        db.update(HanaDatabase.ActBranchTable.TABLE_NAME, data.getContentValues(), data.getActBranchData(0));
-
-    }
+//
+//    public void update(final ActBranch data) {
+//        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
+//        db.update(HanaDatabase.ActBranchTable.TABLE_NAME, data.getContentValues(), data.getActBranchData(0));
+//
+//    }
 
     public void update(final Team data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
@@ -96,12 +95,12 @@ public class DataHandling {
         db.update(HanaDatabase.TeamTDDTable.TABLE_NAME, data.getContentValues(), data.getTeamTddData(0));
 
     }
-
-    public void update(final Comment data) {
-        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
-        db.update(HanaDatabase.CommentsTable.TABLE_NAME, data.getContentValues(), data.getCommentData(0));
-
-    }
+//
+//    public void update(final Comment data) {
+//        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
+//        db.update(HanaDatabase.CommentsTable.TABLE_NAME, data.getContentValues(), data.getCommentData(0));
+//
+//    }
 
     //delete
 
@@ -115,12 +114,12 @@ public class DataHandling {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
         db.delete(HanaDatabase.HanaTable.TABLE_NAME, id);
     }
-
-    public void delete(final ActBranch data, final int id) {
-        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
-        db.delete(HanaDatabase.ActBranchTable.TABLE_NAME, id);
-
-    }
+//
+//    public void delete(final ActBranch data, final int id) {
+//        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
+//        db.delete(HanaDatabase.ActBranchTable.TABLE_NAME, id);
+//
+//    }
 
     public void delete(final Team data, final int id) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
@@ -133,12 +132,12 @@ public class DataHandling {
         db.delete(HanaDatabase.TeamTDDTable.TABLE_NAME, id);
 
     }
-
-    public void delete(final Comment data, final int id) {
-        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
-        db.delete(HanaDatabase.CommentsTable.TABLE_NAME, id);
-
-    }
+//
+//    public void delete(final Comment data, final int id) {
+//        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
+//        db.delete(HanaDatabase.CommentsTable.TABLE_NAME, id);
+//
+//    }
 
 //    public List<User> getListUser() {
 //        Cursor c = null;

@@ -19,11 +19,11 @@ public class Team {
 
     public Team(String teamId,
                 String teamName,
-                String teamTddId) {
+                String hanaId) {
         teamData = new String[DATA_COUNT];
         teamData[0] = teamId;
         teamData[1] = teamName;
-        teamData[2] = teamTddId;
+        teamData[2] = hanaId;
 
     }
 
