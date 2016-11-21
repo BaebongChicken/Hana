@@ -39,18 +39,18 @@ public class HanaDataBaseCreator implements DataBaseCreator {
     private final String INDEX_CREATE_HANA_TABLE = "CREATE UNIQUE INDEX"
             + HanaTable.TABLE_NAME + "_pk ON "
             + HanaTable.TABLE_NAME + " (" + UserTable.COL_USER_ID + ");";
-    //
-    //ACTBRANCH
-    //
-    private final String TABLE_CREATE_ACT_BRANCH_TABLE = "CREATE TABLE" +
-            ActBranchTable.TABLE_NAME + "("
-            + ActBranchTable.COL_ACTBR_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
-            + ActBranchTable.COL_ACTBR_NAME + " TEXT,"
-            + ActBranchTable.COL_TEAM_ID + " INTEGER);";
-
-    private final String INDEX_CREATE_ACT_BRANCH_TABLE = "CREATE UNIQUE INDEX"
-            + ActBranchTable.TABLE_NAME + "_pk ON "
-            + ActBranchTable.TABLE_NAME + " (" + ActBranchTable.COL_ACTBR_ID + ");";
+//    //
+//    //ACTBRANCH
+//    //
+//    private final String TABLE_CREATE_ACT_BRANCH_TABLE = "CREATE TABLE" +
+//            ActBranchTable.TABLE_NAME + "("
+//            + ActBranchTable.COL_ACTBR_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+//            + ActBranchTable.COL_ACTBR_NAME + " TEXT,"
+//            + ActBranchTable.COL_TEAM_ID + " INTEGER);";
+//
+//    private final String INDEX_CREATE_ACT_BRANCH_TABLE = "CREATE UNIQUE INDEX"
+//            + ActBranchTable.TABLE_NAME + "_pk ON "
+//            + ActBranchTable.TABLE_NAME + " (" + ActBranchTable.COL_ACTBR_ID + ");";
     //
     //TEAM
     //
@@ -76,27 +76,28 @@ public class HanaDataBaseCreator implements DataBaseCreator {
     private final String INDEX_CREATE_TEAM_TDD_TABLE = "CREATE UNIQUE INDEX"
             + TeamTDDTable.TABLE_NAME + "_pk ON "
             + TeamTDDTable.TABLE_NAME + " (" + TeamTDDTable.COL_TEAMTDD_ID + ");";
-    //
-    //COMMENT
-    //
-    private final String TABLE_CREATE_COMMENTS_TABLE = "CREATE TABLE" +
-            CommentsTable.TABLE_NAME + "("
-            + CommentsTable.COL_COMMENT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-            + CommentsTable.COL_COMMENT_CONTENT + " TEXT);";
-
-    private final String INDEX_CREATE_COMMENTS_TABLE = "CREATE UNIQUE INDEX"
-            + CommentsTable.COL_COMMENT_ID + "_pk ON"
-            + CommentsTable.COL_COMMENT_CONTENT + " (" + CommentsTable.COL_COMMENT_ID + ");";
+//    //
+//    //COMMENT
+//    //
+//    private final String TABLE_CREATE_COMMENTS_TABLE = "CREATE TABLE" +
+//            CommentsTable.TABLE_NAME + "("
+//            + CommentsTable.COL_COMMENT_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+//            + CommentsTable.COL_COMMENT_CONTENT + " TEXT);";
+//
+//    private final String INDEX_CREATE_COMMENTS_TABLE = "CREATE UNIQUE INDEX"
+//            + CommentsTable.COL_COMMENT_ID + "_pk ON"
+//            + CommentsTable.COL_COMMENT_CONTENT + " (" + CommentsTable.COL_COMMENT_ID + ");";
 
     @Override
     public String[] getCreateTableStmt() {
         return new String[]{
                 TABLE_CREATE_USER_TABLE,
                 TABLE_CREATE_HANA_TABLE,
-                TABLE_CREATE_ACT_BRANCH_TABLE,
+//                TABLE_CREATE_ACT_BRANCH_TABLE,
                 TABLE_CREATE_TEAM_TABLE,
                 TABLE_CREATE_TEAM_TDD_TABLE,
-                TABLE_CREATE_COMMENTS_TABLE};
+//                TABLE_CREATE_COMMENTS_TABLE
+        };
     }
 
     @Override
@@ -104,10 +105,11 @@ public class HanaDataBaseCreator implements DataBaseCreator {
         return new String[]{
                 INDEX_CREATE_USER_TABLE,
                 INDEX_CREATE_HANA_TABLE,
-                INDEX_CREATE_ACT_BRANCH_TABLE,
+//                INDEX_CREATE_ACT_BRANCH_TABLE,
                 INDEX_CREATE_TEAM_TABLE,
                 INDEX_CREATE_TEAM_TDD_TABLE,
-                INDEX_CREATE_COMMENTS_TABLE};
+//                INDEX_CREATE_COMMENTS_TABLE
+        };
     }
 
     @Override

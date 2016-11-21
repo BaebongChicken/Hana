@@ -63,26 +63,26 @@ public class HanaDatabase {
 
     }
 
-    public static final class ActBranchTable {
-        private ActBranchTable() {
-        }
-
-        public static final String TABLE_NAME               = "ACT_BRANCH";
-        public static final String COL_ACTBR_ID             = "actBranchId";
-        public static final String COL_ACTBR_NAME           = "actBranchName";
-        public static final String COL_TEAM_ID              = "teamId";
-
-
-        public static String[] getColumnNames() {
-            String[] COLUMNS =
-                    {
-                            COL_ACTBR_ID,
-                            COL_ACTBR_NAME,
-                            COL_TEAM_ID
-                    };
-            return COLUMNS;
-        }
-    }
+//    public static final class ActBranchTable {
+//        private ActBranchTable() {
+//        }
+//
+//        public static final String TABLE_NAME               = "ACT_BRANCH";
+//        public static final String COL_ACTBR_ID             = "actBranchId";
+//        public static final String COL_ACTBR_NAME           = "actBranchName";
+//        public static final String COL_TEAM_ID              = "teamId";
+//
+//
+//        public static String[] getColumnNames() {
+//            String[] COLUMNS =
+//                    {
+//                            COL_ACTBR_ID,
+//                            COL_ACTBR_NAME,
+//                            COL_TEAM_ID
+//                    };
+//            return COLUMNS;
+//        }
+//    }
 
     public static final class TeamTable {
         private TeamTable() {
