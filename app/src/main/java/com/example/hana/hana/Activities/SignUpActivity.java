@@ -30,13 +30,14 @@ public class SignUpActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         dataHandling = new DataHandling(getApplicationContext());
+
         bindView();
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 User mUser = new User(
-                        signupTxt1.getText().toString(),
+                        null,
                         signupTxt2.getText().toString(),
                         signupTxt3.getText().toString(),
                         signupTxt4.getText().toString(),
@@ -45,6 +46,9 @@ public class SignUpActivity extends BaseActivity {
                 dataHandling.insert(mUser);
             }
         });
+
+
+
 
 
     }

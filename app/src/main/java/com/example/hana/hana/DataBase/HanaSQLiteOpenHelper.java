@@ -217,6 +217,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
     @param (SQLLiteDataBase instance)
      */
     @Override
+
     public void onCreate(SQLiteDatabase db) {
         DataBaseCreator mCreator = new HanaDataBaseCreator();
         String[] tableCreateStmt = mCreator.getCreateTableStmt();
