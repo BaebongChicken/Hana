@@ -5,6 +5,7 @@
     android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context="com.example.hana.hana.Activities.SignUpActivity">
 
     <ScrollView
