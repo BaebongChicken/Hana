@@ -16,8 +16,8 @@ import com.example.hana.hana.Data.User;
  */
 
 public class DataHandling {
-    private static final String CLASSNAME = DataHandling.class.getSimpleName();
-    private HanaSQLiteOpenHelper db;
+        private static final String CLASSNAME = DataHandling.class.getSimpleName();
+        private HanaSQLiteOpenHelper db;
 
     public DataHandling(Context context) {
         db = HanaSQLiteOpenHelper.getInstance(context);

@@ -50,7 +50,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
     private static void initialize(Context context) {
         if (mInstance == null) {
             Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME
-                    + "Try to create instance of database ("
+                    + " Try to create instance of database ("
                     + DataBaseCreator.DB_NAME + ")");
             mInstance = new HanaSQLiteOpenHelper(context);
 
@@ -61,7 +61,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
                 Log.e(Constants.LOG_TAG, "Could not create and/or Open the database (" + DataBaseCreator.DB_NAME +
                         ") that will be used for reading and writing.");
             }
-            Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + "instance of databse (" + DataBaseCreator.DB_NAME + ") created.");
+            Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + " instance of databse (" + DataBaseCreator.DB_NAME + ") created.");
         }
     }
 

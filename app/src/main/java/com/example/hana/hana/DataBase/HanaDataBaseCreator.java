@@ -5,8 +5,13 @@ package com.example.hana.hana.DataBase;
  * Created by Jin Hee Lee on 2016-11-20.
  */
 
-import com.example.hana.hana.Data.User;
-import com.example.hana.hana.DataBase.HanaDatabase.*;
+import android.util.Log;
+
+import com.example.hana.hana.Constants.Constants;
+import com.example.hana.hana.DataBase.HanaDatabase.HanaTable;
+import com.example.hana.hana.DataBase.HanaDatabase.TeamTDDTable;
+import com.example.hana.hana.DataBase.HanaDatabase.TeamTable;
+import com.example.hana.hana.DataBase.HanaDatabase.UserTable;
 
 public class HanaDataBaseCreator implements DataBaseCreator {
 
@@ -143,8 +148,10 @@ public class HanaDataBaseCreator implements DataBaseCreator {
         };
 
         String[] initData = new String[initUserValues.length + initHanaValues.length];
-
+        Log.v(Constants.LOG_TAG, "init Data Length :"+initData.length);
         for (i = 0; i < initUserValues.length; i++) {
+            Log.v(Constants.LOG_TAG, "i  :"+i);
+
             initData[i] = "INSERT INTO " + UserTable.TABLE_NAME
                     + " VALUES("
                     + "'" + initUserValues[i][0] + "'"
@@ -156,16 +163,14 @@ public class HanaDataBaseCreator implements DataBaseCreator {
                     + ");";
         }
 
-        for (i = initUserValues.length; i < initUserValues.length + initHanaValues.length; i++) {
+        for (i = initUserValues.length; i < (initUserValues.length + initHanaValues.length); i++) {
+            Log.v(Constants.LOG_TAG, "i  :"+i);
+
             initData[i] = "INSERT INTO " + HanaTable.TABLE_NAME
                     + " VALUES("
-                    + "'" + initHanaValues[i][0] + "'"
-                    + "'" + initHanaValues[i][1] + "'"
-                    + "'" + initHanaValues[i][2] + "'"
-                    + "'" + initHanaValues[i][3] + "'"
-                    + "'" + initHanaValues[i][4] + "'"
-                    + "'" + initHanaValues[i][5] + "'"
-                    + "'" + initHanaValues[i][6] + "'"
+                    + "'" + initHanaValues[i-initUserValues.length][0] + "'"
+                    + "'" + initHanaValues[i-initUserValues.length][1] + "'"
+                    + "'" + initHanaValues[i-initUserValues.length][2] + "'"
                     + ");";
         }
 
