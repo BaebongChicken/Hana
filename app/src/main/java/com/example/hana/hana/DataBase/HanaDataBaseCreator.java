@@ -20,7 +20,8 @@ public class HanaDataBaseCreator implements DataBaseCreator {
     //
     private final String TABLE_CREATE_USER_TABLE = "CREATE TABLE " +
             UserTable.TABLE_NAME + "("
-            + UserTable.COL_USER_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+//            + UserTable.COL_USER_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
+            + UserTable.COL_USER_ID + " INTEGER NOT NULL PRIMARY KEY, "
             + UserTable.COL_USER_NAME + " TEXT,"
             + UserTable.COL_USER_PHONE + " TEXT,"
             + UserTable.COL_USER_THUMBNAIL_URL + " TEXT,"
@@ -132,11 +133,11 @@ public class HanaDataBaseCreator implements DataBaseCreator {
         int i;
 
         String[][] initUserValues = {
-                {"0", "이코딩", "01000001111", null, "0", "Admin"},
-                {"1", "염클론", "01022223333", null, "0", "Member"},
-                {"2", "이용우", "01033334444", null, "1", "Admin"},
-                {"3", "이겐주", "01012345124", null, "1", "Member"},
-                {"4", "개문녕", "01012355882", null, "1", "Member"},
+                {"0", "이코딩", "01000001111", null, "0", "admin"},
+                {"1", "염클론", "01022223333", null, "0", "member"},
+                {"2", "이용우", "01033334444", null, "1", "admin"},
+                {"3", "이겐주", "01012345124", null, "1", "member"},
+                {"4", "개문녕", "01012355882", null, "1", "member"},
         };
         String[][] initHanaValues = {
                 {

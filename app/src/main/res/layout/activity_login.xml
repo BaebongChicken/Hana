@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:gravity="center"
         android:text="HANA"
-        android:textSize="40dp"
+        android:textSize="100dp"
         android:textStyle="bold"
 
         />
@@ -22,10 +23,11 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/facebook_login_button"
         android:layout_width="match_parent"
-        
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_below="@+id/titleTv"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
 
 </RelativeLayout>

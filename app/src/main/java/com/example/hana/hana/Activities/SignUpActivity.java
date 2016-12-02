@@ -1,5 +1,6 @@
 package com.example.hana.hana.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,14 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.example.hana.hana.Adapters.UserAdapter;
 import com.example.hana.hana.Constants.Constants;
 import com.example.hana.hana.Data.User;
 import com.example.hana.hana.DataBase.DataHandling;
 import com.example.hana.hana.R;
-import com.nostra13.universalimageloader.utils.L;
+import com.example.hana.hana.Utils.ContextUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +54,8 @@ public class SignUpActivity extends BaseActivity {
                         signupTxt5.getText().toString(),
                         signupTxt6.getText().toString());
                 dataHandling.insert(mUser);
+
+
             }
         });
 
@@ -61,8 +63,8 @@ public class SignUpActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 userArrayList = dataHandling.getListUser();
-                Log.d(Constants.LOG_TAG,Arrays.toString(userArrayList.toArray()));
-                UserAdapter mAdapter= new UserAdapter(getLayoutInflater(),userArrayList);
+                Log.d(Constants.LOG_TAG, Arrays.toString(userArrayList.toArray()));
+                UserAdapter mAdapter = new UserAdapter(getLayoutInflater(), userArrayList);
                 signuplv.setAdapter(mAdapter);
                 setListViewHeightBasedOnItems(signuplv);
             }

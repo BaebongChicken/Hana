@@ -7,15 +7,18 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import com.example.hana.hana.Constants.Constants;
-
 import com.example.hana.hana.Data.Hana;
 import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.Data.TeamTDD;
 import com.example.hana.hana.Data.User;
-import com.example.hana.hana.DataBase.HanaDatabase.*;
+import com.example.hana.hana.DataBase.HanaDatabase.HanaTable;
+import com.example.hana.hana.DataBase.HanaDatabase.TeamTDDTable;
+import com.example.hana.hana.DataBase.HanaDatabase.TeamTable;
+import com.example.hana.hana.DataBase.HanaDatabase.UserTable;
 
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
+
+import static com.example.hana.hana.DataBase.HanaDatabase.UserTable.COL_USER_ID;
 
 /**
  * Created by Jin Hee Lee on 2016-11-20.
@@ -144,11 +147,31 @@ public class DataHandling {
 //        db.delete(HanaDatabase.CommentsTable.TABLE_NAME, id);
 //
 //    }
+    public User getUserById(String userId){
+        Cursor c=null;
+        User mUser = null;
 
+        ArrayList<User> ret = null;
+
+        String sql = "SELECT "+COL_USER_ID+" FROM "+ UserTable.TABLE_NAME +" WHERE "+COL_USER_ID+"="+userId;
+        try{
+            c= db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorUser(c);
+            mUser = ret.get(0);
+        }catch (SQLiteException e){
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        }finally {
+            if(c!=null&&c.isClosed()){
+                c.close();
+            }
+        }
+        return mUser;
+    }
     public ArrayList<User> getListUser() {
         Cursor c = null;
         ArrayList<User> ret = null;
-        String sql = "SELECT * FROM " + HanaDatabase.UserTable.TABLE_NAME + " ORDER BY 1";
+        String sql = "SELECT * FROM " + UserTable.TABLE_NAME + " ORDER BY 1";
         try {
             Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
             c = db.get(sql);

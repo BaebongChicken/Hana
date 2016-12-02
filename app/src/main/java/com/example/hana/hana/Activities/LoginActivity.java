@@ -7,8 +7,10 @@ import android.view.View;
 
 import com.example.hana.hana.Constants.Constants;
 import com.example.hana.hana.Data.User;
+import com.example.hana.hana.DataBase.DataHandling;
 import com.example.hana.hana.DataBase.HanaSQLiteOpenHelper;
 import com.example.hana.hana.R;
+import com.example.hana.hana.Utils.ContextUtil;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -31,24 +33,20 @@ public class LoginActivity extends BaseActivity {
 
     CallbackManager callbackManager;
     HanaSQLiteOpenHelper hanaDb;
+    private DataHandling dataHandling;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-
+        dataHandling = new DataHandling(getApplicationContext());
         hanaDb = new HanaSQLiteOpenHelper(getApplicationContext());
-
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
+        startProperActivity();
 
         setContentView(R.layout.activity_login);
-//        nameTextView = (TextView) findViewById(R.id.textview1);
-//        email = (TextView) findViewById(R.id.textview2);
-//        user_thumbnail = (ImageView) findViewById(R.id.thumbnail);
+
         callbackManager = CallbackManager.Factory.create();
         LoginButton facebookLoginButton = (LoginButton) findViewById(R.id.facebook_login_button);
 
@@ -60,6 +58,7 @@ public class LoginActivity extends BaseActivity {
                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList(permissions));
             }
         });
+
         facebookLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
@@ -86,7 +85,8 @@ public class LoginActivity extends BaseActivity {
         );
 
 
-        /*try {
+        /* key Hash 값 찾기
+        try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.example.hana.hana", //앱의 패키지 명
                     PackageManager.GET_SIGNATURES);
@@ -102,9 +102,21 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    private void startProperActivity() {
+        if (ContextUtil.isUserLoggedin(getApplicationContext())) {
+            Intent mIntent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(mIntent);
+            finish();
+        } else {
+            Log.d(Constants.LOG_TAG, "We need to sign up");
+        }
+    }
+
     private void addNewUser(String userId, String userName, String userPhone, String userThumbnailURL, String hanaId, String level) {
         User user = new User(userId, userName, userPhone, userThumbnailURL, hanaId, level);
+        dataHandling.insert(user);
     }
+
 
     private void submit(final LoginResult loginResult) {
         GraphRequest request;
@@ -117,24 +129,21 @@ public class LoginActivity extends BaseActivity {
                             Log.d("GraphResponse", object.toString());
                             try {
 
-//                                nameTextView.setText(object.getString("name"));
-//                                email.setText(object.getString("email"));
-//                                user_id = object.getString("id");
-
-//                                ImageLoader imageLoader = ImageLoader.getInstance();
-
-//                                user_thumbnail_url = new URL("https://graph.facebook.com/" + user_id + "/picture?type=normal");
-//                                imageLoader.displayImage(user_thumbnail_url.toString(), user_thumbnail);
-
-
-
+                                String mId = object.getString("id");
+                                String mName = object.getString("name");
+                                String mThumbNail = "https://graph.facebook.com/" + object.getString("id") + "/picture?type=normal";
+                                addNewUser(mId, mName, "", mThumbNail, "", "ADMIN");
+                                ContextUtil.setLoggedIn(getApplicationContext(), true);
+                                Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(mIntent);
+                                finish();
                             } catch (Exception e) {
-                                Log.e("jinhee", "error");
+                                Log.e(Constants.LOG_TAG, "error");
 
                             }
 
                         } catch (Exception e) {
-                            Log.e("jinhee", "error");
+                            Log.e(Constants.LOG_TAG, "error");
 
                         }
                     }
