@@ -1,7 +1,9 @@
 package com.example.hana.hana.DataBase;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import com.example.hana.hana.Constants.Constants;
@@ -10,14 +12,18 @@ import com.example.hana.hana.Data.Hana;
 import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.Data.TeamTDD;
 import com.example.hana.hana.Data.User;
+import com.example.hana.hana.DataBase.HanaDatabase.*;
+
+import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 
 /**
  * Created by Jin Hee Lee on 2016-11-20.
  */
 
 public class DataHandling {
-        private static final String CLASSNAME = DataHandling.class.getSimpleName();
-        private HanaSQLiteOpenHelper db;
+    private static final String CLASSNAME = DataHandling.class.getSimpleName();
+    private HanaSQLiteOpenHelper db;
 
     public DataHandling(Context context) {
         db = HanaSQLiteOpenHelper.getInstance(context);
@@ -139,24 +145,148 @@ public class DataHandling {
 //
 //    }
 
-//    public List<User> getListUser() {
-//        Cursor c = null;
-//        ArrayList<User> ret = null;
-//        String sql = "SELECT * FROM " + HanaDatabase.UserTable.TABLE_NAME + " ORDER BY 1";
-//        try {
-//            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
-//            c = db.get(sql);
-//            //db.logCursorInfo(c);
-//          //  ret = setBindCursor(c);
-//        } catch (SQLiteException e) {
-//            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
-//        } finally {
-//            if (c != null && c.isClosed()) {
-//                c.close();
-//            }
-//        }
-//        return ret;
-//    }
+    public ArrayList<User> getListUser() {
+        Cursor c = null;
+        ArrayList<User> ret = null;
+        String sql = "SELECT * FROM " + HanaDatabase.UserTable.TABLE_NAME + " ORDER BY 1";
+        try {
+            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorUser(c);
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return ret;
+    }
+
+    public ArrayList<Hana> getListHana() {
+        Cursor c = null;
+        ArrayList<Hana> ret = null;
+        String sql = "SELECT * FROM " + HanaDatabase.HanaTable.TABLE_NAME + " ORDER BY 1";
+        try {
+            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorHana(c);
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return ret;
+    }
+
+    public ArrayList<Team> getListTeam() {
+        Cursor c = null;
+        ArrayList<Team> ret = null;
+        String sql = "SELECT * FROM " + HanaDatabase.TeamTable.TABLE_NAME + " ORDER BY 1";
+        try {
+            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorTeam(c);
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return ret;
+    }
+
+    public ArrayList<TeamTDD> getListTeamTdd() {
+        Cursor c = null;
+        ArrayList<TeamTDD> ret = null;
+        String sql = "SELECT * FROM " + HanaDatabase.TeamTDDTable.TABLE_NAME + " ORDER BY 1";
+        try {
+            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorTeamTDD(c);
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return ret;
+    }
+
+    private ArrayList<User> setBindCursorUser(final Cursor c) {
+        ArrayList<User> ret = new ArrayList<User>();
+        int numRows = c.getCount();
+        c.moveToFirst();
+        for (int i = 0; i < numRows; i++) {
+            User mObj = new User();
+            String[] mDatas = new String[UserTable.getColumnCount()];
+            for (int j = 0; j < mDatas.length; j++) {
+                mDatas[j] = c.getString(c.getColumnIndex(UserTable.getColumnNames()[j]));
+            }
+            mObj.setUserData(mDatas);
+            ret.add(mObj);
+            c.moveToNext();
+        }
+        return ret;
+    }
+
+    private ArrayList<Hana> setBindCursorHana(final Cursor c) {
+        ArrayList<Hana> ret = new ArrayList<Hana>();
+        int numRows = c.getCount();
+        c.moveToFirst();
+        for (int i = 0; i < numRows; i++) {
+            Hana mObj = new Hana();
+            String[] mDatas = new String[HanaTable.getColumnCount()];
+            for (int j = 0; j < mDatas.length; j++) {
+                mDatas[j] = c.getString(c.getColumnIndex(HanaTable.getColumnNames()[j]));
+            }
+            mObj.setHanaData(mDatas);
+            ret.add(mObj);
+            c.moveToNext();
+        }
+        return ret;
+    }
+    private ArrayList<Team> setBindCursorTeam(final Cursor c) {
+        ArrayList<Team> ret = new ArrayList<Team>();
+        int numRows = c.getCount();
+        c.moveToFirst();
+        for (int i = 0; i < numRows; i++) {
+            Team mObj = new Team();
+            String[] mDatas = new String[TeamTable.getColumnCount()];
+            for (int j = 0; j < mDatas.length; j++) {
+                mDatas[j] = c.getString(c.getColumnIndex(TeamTable.getColumnNames()[j]));
+            }
+            mObj.setTeamData(mDatas);
+            ret.add(mObj);
+            c.moveToNext();
+        }
+        return ret;
+    }
+
+    private ArrayList<TeamTDD> setBindCursorTeamTDD(final Cursor c) {
+        ArrayList<TeamTDD> ret = new ArrayList<TeamTDD>();
+        int numRows = c.getCount();
+        c.moveToFirst();
+        for (int i = 0; i < numRows; i++) {
+            TeamTDD mObj = new TeamTDD();
+            String[] mDatas = new String[TeamTDDTable.getColumnCount()];
+            for (int j = 0; j < mDatas.length; j++) {
+                mDatas[j] = c.getString(c.getColumnIndex(TeamTDDTable.getColumnNames()[j]));
+            }
+            mObj.setTeamTddData(mDatas);
+            ret.add(mObj);
+            c.moveToNext();
+        }
+        return ret;
+    }
 
 
 }

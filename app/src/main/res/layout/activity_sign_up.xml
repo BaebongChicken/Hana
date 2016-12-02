@@ -1,93 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sign_up"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context="com.example.hana.hana.Activities.SignUpActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:id="@+id/HeaderScrollView">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="0">
+                android:layout_weight="0"
+                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/signupTxt1"
 
                     android:layout_width="match_parent"
-                    android:hint="User ID"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp"
+                    android:hint="User ID" />
 
                 <EditText
                     android:id="@+id/signupTxt2"
 
                     android:layout_width="match_parent"
-                    android:hint="User Name"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp"
+                    android:hint="User Name" />
 
                 <EditText
                     android:id="@+id/signupTxt3"
 
                     android:layout_width="match_parent"
-                    android:hint="User Phone"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp"
+                    android:hint="User Phone" />
 
                 <EditText
                     android:id="@+id/signupTxt4"
 
                     android:layout_width="match_parent"
-                    android:hint="User Thumbnail URL"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp"
+                    android:hint="User Thumbnail URL" />
 
                 <EditText
                     android:id="@+id/signupTxt5"
 
                     android:layout_width="match_parent"
-                    android:hint="User Level"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp"
+                    android:hint="User Level" />
 
                 <EditText
                     android:id="@+id/signupTxt6"
 
                     android:layout_width="match_parent"
-                    android:hint="User HanaId"
-                    android:layout_height="100dp" />
+                    android:layout_height="100dp"
+                    android:hint="User HanaId" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0">
+                android:layout_weight="0"
+                android:orientation="vertical">
 
                 <Button
-                    android:text="추가"
+                    android:id="@+id/addBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/addBtn" />
+                    android:text="추가" />
 
-                <ListView
+                <Button
+                    android:id="@+id/checkBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/signuplv" />
+                    android:text="조회" />
+
             </LinearLayout>
+
+            <ListView
+                android:id="@+id/signuplv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:scrollbars="none"
+                android:layout_weight="0" />
 
         </LinearLayout>
 
 
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>

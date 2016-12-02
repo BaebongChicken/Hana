@@ -3,39 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:gravity="center"
     tools:context="com.example.hana.hana.Activities.LoginActivity">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/titleTv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="HANA"
+        android:textSize="40dp"
+        android:textStyle="bold"
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/facebook_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="30dp" />
+        />
 
-        <TextView
-            android:id="@+id/textview1"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="NAME"
-            android:textSize="36sp" />
-        <TextView
-            android:id="@+id/textview2"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="EMAIL"
-            android:textSize="36sp" />
-        <ImageView
-            android:id="@+id/thumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login_button"
+        android:layout_width="match_parent"
+        
+        android:layout_height="30dp"
+        android:layout_below="@+id/titleTv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
-
-    </LinearLayout>
 </RelativeLayout>

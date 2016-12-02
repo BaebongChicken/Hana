@@ -11,6 +11,9 @@ import com.example.hana.hana.DataBase.HanaDatabase;
 public class TeamTDD {
     final static int DATA_COUNT = 4;
     private String[] teamTddData;
+    public TeamTDD() {
+        this.teamTddData = null;
+    }
 
     public TeamTDD(String[] teamTddData){
         this.teamTddData = teamTddData;

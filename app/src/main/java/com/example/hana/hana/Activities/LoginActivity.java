@@ -30,12 +30,6 @@ import java.util.Arrays;
 public class LoginActivity extends BaseActivity {
 
     CallbackManager callbackManager;
-    //    TextView nameTextView;
-//    TextView email;
-//    String user_id = "";
-//    URL user_thumbnail_url = null;
-//    ImageView user_thumbnail;
-    String[] userLoginData;
     HanaSQLiteOpenHelper hanaDb;
 
     @Override

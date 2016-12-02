@@ -11,7 +11,8 @@
         android:layout_height="100dp"
         android:layout_weight="1"
         android:text="id"
-        android:gravity="center" />
+        android:gravity="center"
+        android:id="@+id/userId" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -23,33 +24,33 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="username"
-            android:id="@+id/userIdtv1"
+            android:id="@+id/usertv1"
             android:layout_weight="1" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="userphone"
-            android:id="@+id/userIdtv2"
+            android:id="@+id/usertv2"
             android:layout_weight="1" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="userURL"
-            android:id="@+id/userIdtv3"
+            android:id="@+id/usertv3"
             android:layout_weight="1" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="userHanaId"
-            android:id="@+id/userIdtv4"
+            android:id="@+id/usertv4"
             android:layout_weight="1" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="userLevel"
-            android:id="@+id/userIdtv5"
+            android:id="@+id/usertv5"
             android:layout_weight="1" />
     </LinearLayout>
 

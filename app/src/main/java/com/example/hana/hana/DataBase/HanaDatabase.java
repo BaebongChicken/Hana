@@ -14,12 +14,13 @@ public class HanaDatabase {
 
         public static final String TABLE_NAME = "USER";
 
-        public static final String COL_USER_ID              = "userId";
-        public static final String COL_USER_NAME            = "userName";
-        public static final String COL_USER_PHONE           = "userPhone";
-        public static final String COL_USER_THUMBNAIL_URL   = "userThumbnailURL";
-        public static final String COL_HANA_ID                  = "hanaId";
-        public static final String COL_LEVEL                = "level";
+        public static final String COL_USER_ID = "userId";
+        public static final String COL_USER_NAME = "userName";
+        public static final String COL_USER_PHONE = "userPhone";
+        public static final String COL_USER_THUMBNAIL_URL = "userThumbnailURL";
+        public static final String COL_HANA_ID = "hanaId";
+        public static final String COL_LEVEL = "level";
+
         public static String[] getColumnNames() {
             String[] COLUMNS =
                     {
@@ -29,6 +30,10 @@ public class HanaDatabase {
             return COLUMNS;
         }
 
+        public static int getColumnCount() {
+            return getColumnNames().length;
+        }
+
 
     }
 
@@ -36,11 +41,11 @@ public class HanaDatabase {
         private HanaTable() {
         }
 
-        public static final String TABLE_NAME               = "HANA";
+        public static final String TABLE_NAME = "HANA";
 
-        public static final String COL_HANA_ID              = "hanaId";
-        public static final String COL_HANA_NAME            = "hanaName";
-        public static final String COL_HANA_THUMBNAIL       = "hanaThumbnail";
+        public static final String COL_HANA_ID = "hanaId";
+        public static final String COL_HANA_NAME = "hanaName";
+        public static final String COL_HANA_THUMBNAIL = "hanaThumbnail";
 
 
         public static String[] getColumnNames() {
@@ -53,6 +58,9 @@ public class HanaDatabase {
             return COLUMNS;
         }
 
+        public static int getColumnCount() {
+            return getColumnNames().length;
+        }
     }
 
 //    public static final class ActBranchTable {
@@ -80,10 +88,10 @@ public class HanaDatabase {
         private TeamTable() {
         }
 
-        public static final String TABLE_NAME               = "TEAM";
-        public static final String COL_TEAM_ID              = "teamId";
-        public static final String COL_TEAM_NAME            = "teamName";
-        public static final String COL_HANA_ID           = "hanaId";
+        public static final String TABLE_NAME = "TEAM";
+        public static final String COL_TEAM_ID = "teamId";
+        public static final String COL_TEAM_NAME = "teamName";
+        public static final String COL_HANA_ID = "hanaId";
 
 
         public static String[] getColumnNames() {
@@ -95,17 +103,21 @@ public class HanaDatabase {
                     };
             return COLUMNS;
         }
+
+        public static int getColumnCount() {
+            return getColumnNames().length;
+        }
     }
 
     public static final class TeamTDDTable {
         private TeamTDDTable() {
         }
 
-        public static final String TABLE_NAME                   = "TEAM_TDD";
-        public static final String COL_TEAMTDD_ID               = "teamTddId";
-        public static final String COL_TEAMTDD_CONTENT          = "content";
-        public static final String COL_TEAMTDD_STATE            = "state";
-        public static final String COL_TEAM_ID             = "teamId";
+        public static final String TABLE_NAME = "TEAM_TDD";
+        public static final String COL_TEAMTDD_ID = "teamTddId";
+        public static final String COL_TEAMTDD_CONTENT = "content";
+        public static final String COL_TEAMTDD_STATE = "state";
+        public static final String COL_TEAM_ID = "teamId";
 
 
         public static String[] getColumnNames() {
@@ -117,6 +129,10 @@ public class HanaDatabase {
                             COL_TEAM_ID
                     };
             return COLUMNS;
+        }
+
+        public static int getColumnCount() {
+            return getColumnNames().length;
         }
     }
 //

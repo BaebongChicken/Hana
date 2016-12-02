@@ -10,6 +10,9 @@ import com.example.hana.hana.DataBase.HanaDatabase;
 public class Hana {
     final static int DATA_COUNT = 3;
     private String[] hanaData;
+    public Hana() {
+        this.hanaData = null;
+    }
 
     public Hana(String[] hanaData) {
         this.hanaData = hanaData;

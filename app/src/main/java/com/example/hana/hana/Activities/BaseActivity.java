@@ -5,6 +5,10 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 
 /**
@@ -12,20 +16,22 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class BaseActivity extends AppCompatActivity {
-    void bindView() {
-        verifyStoragePermissions(this);
-    }
-
-    // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
+    void bindView() {
+        verifyStoragePermissions(this);
+    }
+
+    // Storage Permissions
+
+
     /**
      * Checks if the app has permission to write to device storage
-     *
+     * <p>
      * If the app does not has permission then the user will be prompted to grant permissions
      *
      * @param activity
@@ -43,53 +49,31 @@ public class BaseActivity extends AppCompatActivity {
             );
         }
     }
-//    public void sqliteExport() {
-//        Log.v(Constants.LOG_TAG, "sqlite EXPROTING");
-//        verifyStoragePermissions(this);
-//        try {
-//
-//            File sdDir = Environment.getExternalStorageDirectory();
-//            File dataDir = Environment.getDataDirectory();
-//            Log.v(Constants.LOG_TAG, Environment.getExternalStorageState()+"/"+sdDir.canWrite()+"/"+sdDir.canRead());
-//            Log.v(Constants.LOG_TAG, getPackageName());
-//            if (sdDir.canWrite()) {
-//                String crDBPath = "//data//com.example.hana.hana/databases//hana_db.db";
-//                String bkDBPath = "hana_db.sqlite";
-//
-//
-//                File crDB = new File(dataDir, crDBPath);
-//                File bkDB = new File(sdDir, bkDBPath);
-//                Log.v(Constants.LOG_TAG, "bk DB 경로 : "+bkDB.getPath()+"***bkDB/crDB Exist? "+bkDB.exists()+"/"+crDB.exists());
-//
-//                if (crDB.exists()) {
-//                    Log.v(Constants.LOG_TAG, "cr DB EXISTS");
-//
-//                    FileChannel src = new FileInputStream(crDB).getChannel();
-//                    FileChannel dst = new FileOutputStream(bkDB).getChannel();
-//
-//                    dst.transferFrom(src, 0, src.size());
-//
-//                    src.close();
-//
-//                    dst.close();
-//
-//                }
-//
-//                if(bkDB.exists()){
-//
-//                    Toast.makeText(this, "DB file Export Success!", Toast.LENGTH_SHORT).show();
-//
-//                }
-//
-//
-//            }
-//
-//        } catch (Exception e) {
-//
-//            e.printStackTrace();
-//
-//        }
-//
-//    }
+
+    public void setListViewHeightBasedOnItems(ListView listView) {
+
+        // Get list adpter of listview;
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)  return;
+
+        int numberOfItems = listAdapter.getCount();
+
+        // Get total height of all items.
+        int totalItemsHeight = 0;
+        for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+            View item = listAdapter.getView(itemPos, null, listView);
+            item.measure(0, 0);
+            totalItemsHeight += item.getMeasuredHeight();
+        }
+
+        // Get total height of all item dividers.
+        int totalDividersHeight = listView.getDividerHeight() *  (numberOfItems - 1);
+
+        // Set list height.
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalItemsHeight + totalDividersHeight;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
 
 }

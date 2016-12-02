@@ -12,9 +12,14 @@ public class User {
     final static int DATA_COUNT = 6;
     private String[] userData;
 
+    public User() {
+        this.userData = null;
+    }
     public User(String[] userData) {
         this.userData = userData;
     }
+
+
 
     public User(String userId,
                 String userName,
