@@ -1,5 +1,6 @@
 package com.example.hana.hana.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -7,15 +8,26 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hana.hana.Adapters.MemberAdapter;
 import com.example.hana.hana.Constants.Constants;
+import com.example.hana.hana.Data.Team;
+import com.example.hana.hana.Data.User;
+import com.example.hana.hana.DataBase.DataHandling;
+import com.example.hana.hana.DataBase.HanaSQLiteOpenHelper;
 import com.example.hana.hana.R;
 import com.example.hana.hana.Utils.BackPressCloseHandler;
 import com.example.hana.hana.Utils.ContextUtil;
 
+import java.util.ArrayList;
+
 public class MainActivity extends BaseActivity {
+    //main
     private DrawerLayout dlactivitymaindrawer;
     private LinearLayout drawLayout;
     private BackPressCloseHandler backPressCloseHandler;
@@ -33,6 +45,14 @@ public class MainActivity extends BaseActivity {
     private LinearLayout memberLayout;
     private TextView myProfileTxt;
     private LinearLayout profileLayout;
+    private ListView actlv;
+    private ListView memberlv;
+    private ArrayList<Team> teamArrayList;
+    private ArrayList<User> memberArrayList;
+
+    private ImageView background;
+    //member
+    private Button memberAddBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +61,22 @@ public class MainActivity extends BaseActivity {
         setCustomActionbar(R.id.custom_action_toolbar_main);
         bindView();
         setValues();
+        setBackground(this.background, ContextUtil.getHanaImagePath(MainActivity.this));
         setOnEvents();
     }
 
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        setOnEvents();
+    }
+
+    @Override
     void bindView() {
         super.bindView();
+        dataHandling = new DataHandling(getApplicationContext());
+        hanaDb = new HanaSQLiteOpenHelper(getApplicationContext());
         this.mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
         this.dlactivitymaindrawer = (DrawerLayout) findViewById(R.id.dl_activity_main_drawer);
         this.drawLayout = (LinearLayout) findViewById(R.id.drawLayout);
@@ -64,6 +93,14 @@ public class MainActivity extends BaseActivity {
         this.actTab = (TextView) findViewById(R.id.actTab);
         this.mainIndicator = (TextView) findViewById(R.id.mainIndicator);
         this.mainTab = (TextView) findViewById(R.id.mainTab);
+        this.background = (ImageView) findViewById(R.id.background_main);
+        //
+        this.actlv = (ListView) findViewById(R.id.actlv);
+        this.memberlv = (ListView) findViewById(R.id.memberlv);
+        this.teamArrayList = new ArrayList<Team>();
+        this.memberArrayList = new ArrayList<User>();
+        //member
+        this.memberAddBtn = (Button) findViewById(R.id.memberAddBtn);
     }
 
     @Override
@@ -128,6 +165,15 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+        memberAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateMemberActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        setMemberArrayList();
 
     }
 
@@ -140,6 +186,15 @@ public class MainActivity extends BaseActivity {
             backPressCloseHandler.onBackPressed();
         }
 
+    }
+
+
+    void setMemberArrayList() {
+        memberArrayList = dataHandling.getListUser();
+
+        MemberAdapter mAdapter = new MemberAdapter(MainActivity.this, getLayoutInflater(), memberArrayList);
+        memberlv.setAdapter(mAdapter);
+        setListViewHeightBasedOnItems(memberlv);
     }
 
 
@@ -162,8 +217,8 @@ public class MainActivity extends BaseActivity {
                 openOrCloseSideMenu();
             }
         });
-    }
 
+    }
 
 
     //함수화 시킨것들

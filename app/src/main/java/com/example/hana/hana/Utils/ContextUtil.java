@@ -15,6 +15,7 @@ public class ContextUtil {
     private static final String LOGGED_IN = "LOGGED_IN";
     private static final String USER_ID = "USER_ID";
     private static final String HANA_ID = "HANA_ID";
+    private static final String HANA_PATH = "HANA_PATH";
 
     private static final String LAST_TEAM_ID = "LAST_TEAM_ID";
     private static final String USER_VALIDATE_KEY = "USER_VALIDATE_KEY";
@@ -106,6 +107,19 @@ public class ContextUtil {
         return prefs.getString(HANA_ID, null);
     }
 
+    public static void setHanaImagePath(Context context, String path) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        prefs.edit().putString(HANA_PATH, path).apply();
+    }
+
+    public static String getHanaImagePath(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        return prefs.getString(HANA_PATH, null);
+    }
 
 //    public static void setLoginUserId(Context context, int userId) {
 //        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,

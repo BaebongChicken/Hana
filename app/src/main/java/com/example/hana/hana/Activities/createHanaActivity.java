@@ -6,10 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,8 +27,6 @@ import com.example.hana.hana.DataBase.HanaSQLiteOpenHelper;
 import com.example.hana.hana.R;
 import com.example.hana.hana.Utils.ContextUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,7 +47,7 @@ public class CreateHanaActivity extends BaseActivity {
     //camera
     private Uri mImageCaptureUri;
     private Bitmap hanaPhoto;
-    private String hanaPhotoFull_path;
+    public String hanaPhotoFull_path;
     private String hanaPhotoName;
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -67,7 +61,7 @@ public class CreateHanaActivity extends BaseActivity {
 
         setCustomActionbar(R.id.custom_action_toolbar_createhana);
         bindView();
-        setBackground();
+        setBackground(background);
         setOnEvents();
 
 
@@ -91,7 +85,7 @@ public class CreateHanaActivity extends BaseActivity {
         this.hanaThumbnailIv = (ImageView) findViewById(R.id.hanaThumbnailIv);
         this.hanaNameTv = (EditText) findViewById(R.id.hanaNameTv);
         this.addPhotolyt = (FrameLayout) findViewById(R.id.addPhotoLyt);
-        this.background = (ImageView) findViewById(R.id.background);
+        this.background = (ImageView) findViewById(R.id.background_main);
     }
 
     @Override
@@ -195,33 +189,7 @@ public class CreateHanaActivity extends BaseActivity {
 
     }
 
-    void setBackground() {
-        String imgUri = "drawable://" + R.drawable.background_sea;
-        ImageLoader.getInstance().displayImage(imgUri, background, new ImageLoadingListener() {
-            @Override
-            public void onLoadingStarted(String imageUri, View view) {
 
-            }
-
-            @Override
-            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-            }
-
-            @Override
-            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                Drawable drawable = new BitmapDrawable(loadedImage);
-                view.setBackground(drawable);
-                ((ImageView) view).setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
-
-            }
-
-            @Override
-            public void onLoadingCancelled(String imageUri, View view) {
-
-            }
-        });
-    }
 
 
     @Override
@@ -261,6 +229,7 @@ public class CreateHanaActivity extends BaseActivity {
                 }
                 String full_path = mImageCaptureUri.getPath();
                 hanaPhotoFull_path = mImageCaptureUri.getPath();
+                ContextUtil.setHanaImagePath(CreateHanaActivity.this,hanaPhotoFull_path);
                 hanaPhoto = BitmapFactory.decodeFile(full_path);
                 ImageLoader.getInstance().displayImage("file://" + full_path, hanaThumbnailIv);
 

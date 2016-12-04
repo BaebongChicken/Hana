@@ -18,6 +18,12 @@
             android:focusableInTouchMode="true">
 
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/background_main"
+                android:scaleType="centerCrop" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -154,6 +160,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="Act" />
+
+                            <ListView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/actlv" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -162,10 +173,31 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                            <TextView
+                            <ScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="member" />
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical" >
+
+                                    <ListView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/memberlv" />
+
+                                    <Button
+                                        android:text="멤버 추가하기"
+                                        android:layout_width="200dp"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/memberAddBtn"
+                                        android:background="@drawable/frame_button_black_stroke"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_marginTop="30dp" />
+                                </LinearLayout>
+                            </ScrollView>
+
                         </LinearLayout>
                     </android.support.v4.view.ViewPager>
                 </RelativeLayout>
@@ -177,7 +209,7 @@
                 android:layout_height="match_parent"
 
                 android:layout_gravity="start"
-                android:background="#ab0"
+                android:background="@color/black_transparent"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
@@ -199,8 +231,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:text="hahahahahah"
-                        android:textSize="40dp" />
+                        android:text="COMMING SOON"
+                        android:textColor="@color/colorPrimaryTextInv" />
 
                 </LinearLayout>
 
