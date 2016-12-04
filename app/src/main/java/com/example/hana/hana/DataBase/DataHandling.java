@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.hana.hana.Constants.Constants;
 import com.example.hana.hana.Data.Hana;
+import com.example.hana.hana.Data.State;
 import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.Data.TeamTDD;
 import com.example.hana.hana.Data.User;
@@ -18,6 +19,7 @@ import com.example.hana.hana.DataBase.HanaDatabase.UserTable;
 
 import java.util.ArrayList;
 
+import static com.example.hana.hana.DataBase.HanaDatabase.UserTable.COL_HANA_ID;
 import static com.example.hana.hana.DataBase.HanaDatabase.UserTable.COL_USER_ID;
 
 /**
@@ -67,6 +69,11 @@ public class DataHandling {
         long rowId = db.insert(HanaDatabase.TeamTDDTable.TABLE_NAME, data.getContentValues());
         if (rowId < 0) throw new SQLException("FAIL at Insert");
     }
+
+    public void insert(final State state) {
+        long rowId = db.insert("STATE", state.getContentValues());
+        if (rowId < 0) throw new SQLException("FAIL at Insert");
+    }
 //
 //    public void insert(final Comment data) {
 //        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + data.toString());
@@ -78,7 +85,8 @@ public class DataHandling {
 
     public void update(final User data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
-        db.update(HanaDatabase.UserTable.TABLE_NAME, data.getContentValues(), data.getUser(0));
+
+        db.update(HanaDatabase.UserTable.TABLE_NAME, data.getContentValues(), data.getUserData(0));
 
     }
 
@@ -102,6 +110,11 @@ public class DataHandling {
     public void update(final TeamTDD data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
         db.update(HanaDatabase.TeamTDDTable.TABLE_NAME, data.getContentValues(), data.getTeamTddData(0));
+
+    }
+
+    public void update(final State state) {
+        db.update("STATE", state.getContentValues(), 1);
 
     }
 //
@@ -141,33 +154,58 @@ public class DataHandling {
         db.delete(HanaDatabase.TeamTDDTable.TABLE_NAME, id);
 
     }
-//
+
+    //
 //    public void delete(final Comment data, final int id) {
 //        Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
 //        db.delete(HanaDatabase.CommentsTable.TABLE_NAME, id);
 //
 //    }
-    public User getUserById(String userId){
-        Cursor c=null;
+
+//    public State getState() {
+//        Cursor c = null;
+//        State mState = null;
+//        c = db.get("SELECT * FROM STATE WHERE STATE_ID = 1");
+//        try {
+//            mState = setBindCursorState(c);
+//        }catch (SQLiteException e) {
+//            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+//        } finally {
+//            if (c != null && c.isClosed()) {
+//                c.close();
+//            }
+//        }
+//        return mState;
+//    }
+
+    public User getUserById(String userId) {
+        Cursor c = null;
         User mUser = null;
 
-        ArrayList<User> ret = null;
+        ArrayList<User> ret = new ArrayList<User>();
 
-        String sql = "SELECT "+COL_USER_ID+" FROM "+ UserTable.TABLE_NAME +" WHERE "+COL_USER_ID+"="+userId;
-        try{
-            c= db.get(sql);
+//        String sql = "SELECT " + COL_USER_ID + " FROM " + UserTable.TABLE_NAME + " WHERE " + COL_USER_ID + "=" + "'" + userId + "'";
+        String sql = "SELECT * FROM " + UserTable.TABLE_NAME + " WHERE " + COL_USER_ID + "=" + "'" + userId + "'";
+
+        try {
+            c = db.get(sql);
             db.logCursorInfo(c);
             ret = setBindCursorUser(c);
-            mUser = ret.get(0);
-        }catch (SQLiteException e){
+            for (int i = 0; i < ret.size(); i++) {
+                if (userId.equals(ret.get(i).getUserData(0))) {
+                    mUser = ret.get(i);
+                }
+            }
+        } catch (SQLiteException e) {
             Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
-        }finally {
-            if(c!=null&&c.isClosed()){
+        } finally {
+            if (c != null && c.isClosed()) {
                 c.close();
             }
         }
         return mUser;
     }
+
     public ArrayList<User> getListUser() {
         Cursor c = null;
         ArrayList<User> ret = null;
@@ -185,6 +223,34 @@ public class DataHandling {
             }
         }
         return ret;
+    }
+
+    public Hana getHanaById(String hanaId) {
+        Cursor c = null;
+        Hana mHana = null;
+
+        ArrayList<Hana> ret = new ArrayList<Hana>();
+
+//        String sql = "SELECT " + COL_HANA_ID + " FROM " + HanaTable.TABLE_NAME + " WHERE " + COL_HANA_ID + "=" + "'" + hanaId + "'";
+        String sql = "SELECT *" + " FROM " + HanaTable.TABLE_NAME + " WHERE " + COL_HANA_ID + "=" + "'" + hanaId + "'";
+
+        try {
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorHana(c);
+            for (int i = 0; i < ret.size(); i++) {
+                if (hanaId.equals(ret.get(i).getHanaData(0))) {
+                    mHana = ret.get(i);
+                }
+            }
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return mHana;
     }
 
     public ArrayList<Hana> getListHana() {
@@ -251,7 +317,7 @@ public class DataHandling {
         for (int i = 0; i < numRows; i++) {
             User mObj = new User();
             String[] mDatas = new String[UserTable.getColumnCount()];
-            for (int j = 0; j < mDatas.length; j++) {
+            for (int j = 0; j < c.getColumnCount(); j++) {
                 mDatas[j] = c.getString(c.getColumnIndex(UserTable.getColumnNames()[j]));
             }
             mObj.setUserData(mDatas);
@@ -268,7 +334,7 @@ public class DataHandling {
         for (int i = 0; i < numRows; i++) {
             Hana mObj = new Hana();
             String[] mDatas = new String[HanaTable.getColumnCount()];
-            for (int j = 0; j < mDatas.length; j++) {
+            for (int j = 0; j < c.getColumnCount(); j++) {
                 mDatas[j] = c.getString(c.getColumnIndex(HanaTable.getColumnNames()[j]));
             }
             mObj.setHanaData(mDatas);
@@ -277,6 +343,7 @@ public class DataHandling {
         }
         return ret;
     }
+
     private ArrayList<Team> setBindCursorTeam(final Cursor c) {
         ArrayList<Team> ret = new ArrayList<Team>();
         int numRows = c.getCount();
@@ -311,5 +378,14 @@ public class DataHandling {
         return ret;
     }
 
+    private State setBindCursorState(final Cursor c) {
+        c.moveToFirst();
+        String[] mDatas = new String[3];
+        mDatas[0] = c.getString(c.getColumnIndex("USER_LOGIN"));
+        mDatas[1] = c.getString(c.getColumnIndex("CURRENT_USER_ID"));
+        mDatas[2] = c.getString(c.getColumnIndex("CURRENT_HANA_ID"));
+        State state = new State(mDatas);
+        return state;
+    }
 
 }

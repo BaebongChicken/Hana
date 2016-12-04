@@ -36,7 +36,7 @@ public class UserAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        int mId = Integer.parseInt(datas.get(position).getUser(0));
+        int mId = Integer.parseInt(datas.get(position).getUserData(0));
         return mId;
     }
 
@@ -52,12 +52,12 @@ public class UserAdapter extends BaseAdapter {
         TextView userHana = (TextView) convertView.findViewById(R.id.usertv4);
         TextView userLevel = (TextView) convertView.findViewById(R.id.usertv5);
 
-        userId.setText(datas.get(position).getUser(0));
-        userName.setText(datas.get(position).getUser(1));
-        userPhone.setText(datas.get(position).getUser(2));
-        userURL.setText(datas.get(position).getUser(3));
-        userHana.setText(datas.get(position).getUser(4));
-        userLevel.setText(datas.get(position).getUser(5));
+        userId.setText(datas.get(position).getUserData(0));
+        userName.setText(datas.get(position).getUserData(1));
+        userPhone.setText(datas.get(position).getUserData(2));
+        userURL.setText(datas.get(position).getUserData(3));
+        userHana.setText(datas.get(position).getUserData(4));
+        userLevel.setText(datas.get(position).getUserData(5));
 
         return convertView;
     }

@@ -46,6 +46,8 @@ public class HanaDatabase {
         public static final String COL_HANA_ID = "hanaId";
         public static final String COL_HANA_NAME = "hanaName";
         public static final String COL_HANA_THUMBNAIL = "hanaThumbnail";
+        public static final String COL_HANA_LEVELLIST = "hanaLevelList";
+
 
 
         public static String[] getColumnNames() {
@@ -53,7 +55,8 @@ public class HanaDatabase {
                     {
                             COL_HANA_ID,
                             COL_HANA_NAME,
-                            COL_HANA_THUMBNAIL
+                            COL_HANA_THUMBNAIL,
+                            COL_HANA_LEVELLIST
                     };
             return COLUMNS;
         }

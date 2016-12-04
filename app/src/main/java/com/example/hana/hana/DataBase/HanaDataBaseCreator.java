@@ -5,9 +5,6 @@ package com.example.hana.hana.DataBase;
  * Created by Jin Hee Lee on 2016-11-20.
  */
 
-import android.util.Log;
-
-import com.example.hana.hana.Constants.Constants;
 import com.example.hana.hana.DataBase.HanaDatabase.HanaTable;
 import com.example.hana.hana.DataBase.HanaDatabase.TeamTDDTable;
 import com.example.hana.hana.DataBase.HanaDatabase.TeamTable;
@@ -26,8 +23,7 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             + UserTable.COL_USER_PHONE + " TEXT,"
             + UserTable.COL_USER_THUMBNAIL_URL + " TEXT,"
             + UserTable.COL_HANA_ID + " TEXT,"
-            + UserTable.COL_LEVEL + " TEXT);"
-;
+            + UserTable.COL_LEVEL + " TEXT);";
 
     private final String INDEX_CREATE_USER_TABLE = "CREATE UNIQUE INDEX "
             + UserTable.TABLE_NAME + "_pk ON "
@@ -39,7 +35,8 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             HanaTable.TABLE_NAME + "("
             + HanaTable.COL_HANA_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + HanaTable.COL_HANA_NAME + " TEXT,"
-            + HanaTable.COL_HANA_THUMBNAIL + " TEXT);";
+            + HanaTable.COL_HANA_THUMBNAIL + " TEXT,"
+            + HanaTable.COL_HANA_LEVELLIST + " TEXT);";
 
     private final String INDEX_CREATE_HANA_TABLE = "CREATE UNIQUE INDEX "
             + HanaTable.TABLE_NAME + "_pk ON "
@@ -81,6 +78,15 @@ public class HanaDataBaseCreator implements DataBaseCreator {
     private final String INDEX_CREATE_TEAM_TDD_TABLE = "CREATE UNIQUE INDEX "
             + TeamTDDTable.TABLE_NAME + "_pk ON "
             + TeamTDDTable.TABLE_NAME + " (" + TeamTDDTable.COL_TEAMTDD_ID + ");";
+    //
+    //state Table
+    //
+    private final String STATE_TABLE = "CREATE TABLE STATE(" +
+            "STATE_ID INTEGER NOT NULL," +
+            "USER_LOGIN TEXT," +
+            "CURRENT_USER TEXT," +
+            "CURRENT_HANA TEXT" +
+            ");";
 //    //
 //    //COMMENT
 //    //
@@ -102,6 +108,7 @@ public class HanaDataBaseCreator implements DataBaseCreator {
                 TABLE_CREATE_TEAM_TABLE,
                 TABLE_CREATE_TEAM_TDD_TABLE,
 //                TABLE_CREATE_COMMENTS_TABLE
+                STATE_TABLE
         };
     }
 
@@ -129,52 +136,59 @@ public class HanaDataBaseCreator implements DataBaseCreator {
 
     @Override
     public String[] getInitDataInsertStmt() {
+//        String[] init = {"INSERT INTO STATE VALUES('false','null','null');"};
 
-        int i;
+        return null;
+//        int i;
+//
+//        String[][] initUserValues = {
+//                {"0", "이코딩", "01000001111", null, "0", "admin"},
+//                {"1", "염클론", "01022223333", null, "0", "member"},
+//                {"2", "이용우", "01033334444", null, "1", "admin"},
+//                {"3", "이겐주", "01012345124", null, "1", "member"},
+//                {"4", "개문녕", "01012355882", null, "1", "member"},
+//        };
+//        String[][] initHanaValues = {
+//                {
+//                        "0", "소프트웨어실습", null,""
+//                },
+//                {
+//                        "1", "컴퓨터네트워크", null,""
+//                }
+//        };
+////        String[] initData = new String[4];
+////        String[] initStateValue = {"1","false","null","null"};
+////        for(i=0; i<initStateValue.length;i++){
+////            initData[i] = "INSERT INTO STATE VALUES("
+////        }
+//        String[] initData = new String[initUserValues.length + initHanaValues.length];
+//        Log.v(Constants.LOG_TAG, "init Data Length :"+initData.length);
+//        for (i = 0; i < initUserValues.length; i++) {
+////            Log.v(Constants.LOG_TAG, "i  :"+i);
+//
+//            initData[i] = "INSERT INTO " + UserTable.TABLE_NAME
+//                    + " VALUES("
+//                    + "'" + initUserValues[i][0] + "',"
+//                    + "'" + initUserValues[i][1] + "',"
+//                    + "'" + initUserValues[i][2] + "',"
+//                    + "'" + initUserValues[i][3] + "',"
+//                    + "'" + initUserValues[i][4] + "',"
+//                    + "'" + initUserValues[i][5] + "'"
+//                    + ");";
+//        }
+//
+//        for (i = initUserValues.length; i < (initUserValues.length + initHanaValues.length); i++) {
+////            Log.v(Constants.LOG_TAG, "i  :"+i);
+//
+//            initData[i] = "INSERT INTO " + HanaTable.TABLE_NAME
+//                    + " VALUES("
+//                    + "'" + initHanaValues[i-initUserValues.length][0] + "',"
+//                    + "'" + initHanaValues[i-initUserValues.length][1] + "',"
+//                    + "'" + initHanaValues[i-initUserValues.length][2] + "'"
+//                    + ");";
+//        }
+//
+//        return initData;
 
-        String[][] initUserValues = {
-                {"0", "이코딩", "01000001111", null, "0", "admin"},
-                {"1", "염클론", "01022223333", null, "0", "member"},
-                {"2", "이용우", "01033334444", null, "1", "admin"},
-                {"3", "이겐주", "01012345124", null, "1", "member"},
-                {"4", "개문녕", "01012355882", null, "1", "member"},
-        };
-        String[][] initHanaValues = {
-                {
-                        "0", "소프트웨어실습", null
-                },
-                {
-                        "1", "컴퓨터네트워크", null
-                }
-        };
-
-        String[] initData = new String[initUserValues.length + initHanaValues.length];
-        Log.v(Constants.LOG_TAG, "init Data Length :"+initData.length);
-        for (i = 0; i < initUserValues.length; i++) {
-//            Log.v(Constants.LOG_TAG, "i  :"+i);
-
-            initData[i] = "INSERT INTO " + UserTable.TABLE_NAME
-                    + " VALUES("
-                    + "'" + initUserValues[i][0] + "',"
-                    + "'" + initUserValues[i][1] + "',"
-                    + "'" + initUserValues[i][2] + "',"
-                    + "'" + initUserValues[i][3] + "',"
-                    + "'" + initUserValues[i][4] + "',"
-                    + "'" + initUserValues[i][5] + "'"
-                    + ");";
-        }
-
-        for (i = initUserValues.length; i < (initUserValues.length + initHanaValues.length); i++) {
-//            Log.v(Constants.LOG_TAG, "i  :"+i);
-
-            initData[i] = "INSERT INTO " + HanaTable.TABLE_NAME
-                    + " VALUES("
-                    + "'" + initHanaValues[i-initUserValues.length][0] + "',"
-                    + "'" + initHanaValues[i-initUserValues.length][1] + "',"
-                    + "'" + initHanaValues[i-initUserValues.length][2] + "'"
-                    + ");";
-        }
-
-        return initData;
     }
 }

@@ -3,4 +3,18 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="black_transparent">#7000</color>
+    <color name="white_transparent">#afff</color>
+
+    <color name="gray_line">#aaa</color>
+    <color name="white_line">#fff</color>
+    <!--Tab-->
+    <color name="indicator_inactive">#555</color>
+    <color name="indicator_active">#fff</color>
+    <!--TextColor-->
+    <color name="colorPrimaryText">#000</color>
+    <color name="colorSecondaryText">#444</color>
+    <color name="colorThirdText">#bbb</color>
+    <color name="colorPrimaryTextInv">#fff</color>
+
 </resources>

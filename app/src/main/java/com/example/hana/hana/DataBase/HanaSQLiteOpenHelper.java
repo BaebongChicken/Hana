@@ -239,12 +239,12 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
                 }
             }
 
-            if (initDataDml != null & initDataDml.length > 0) {
-                Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + " - onCreate() : initData Load");
-                for (i = 0; i < initDataDml.length; i++) {
-                    db.execSQL(initDataDml[i]);
-                }
-            }
+//            if (initDataDml != null & initDataDml.length > 0) {
+//                Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + " - onCreate() : initData Load");
+//                for (i = 0; i < initDataDml.length; i++) {
+//                    db.execSQL(initDataDml[i]);
+//                }
+//            }
 
         } catch (SQLException e) {
             Log.e(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + " - on Create() : Table Creation Error", e);

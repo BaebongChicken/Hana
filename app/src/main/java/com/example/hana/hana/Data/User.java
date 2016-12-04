@@ -4,21 +4,23 @@ import android.content.ContentValues;
 
 import com.example.hana.hana.DataBase.HanaDatabase;
 
+import java.util.Arrays;
+
 /**
  * Created by JinHee on 2016-11-07.
  */
 
 public class User {
-    final static int DATA_COUNT = 6;
+    private final static int USER_DATA_COUNT = 6;
     private String[] userData;
 
     public User() {
         this.userData = null;
     }
+
     public User(String[] userData) {
         this.userData = userData;
     }
-
 
 
     public User(String userId,
@@ -28,7 +30,7 @@ public class User {
                 String hanaId,
                 String level) {
 
-        this.userData = new String[DATA_COUNT];
+        this.userData = new String[USER_DATA_COUNT];
         this.userData[0] = userId;
         this.userData[1] = userName;
         this.userData[2] = userPhone;
@@ -39,14 +41,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "USER [userId="
-                + String.valueOf(userData[0])
-                + ", userName=" + String.valueOf(userData[1])
-                + ", userPhone=" + String.valueOf(userData[2])
-                + ", userThumbnailURL=" + String.valueOf(userData[3])
-                + ", hanaId=" + String.valueOf(userData[4])
-                + ", level=" + String.valueOf(userData[5])
-                + "]";
+        return Arrays.toString(getUserData());
     }
 
     public ContentValues getContentValues() {
@@ -59,11 +54,11 @@ public class User {
         return values;
     }
 
-    public String[] getUser() {
+    public String[] getUserData() {
         return this.userData;
     }
 
-    public String getUser(int idx) {
+    public String getUserData(int idx) {
         return this.userData[idx];
     }
 
@@ -71,4 +66,7 @@ public class User {
         this.userData = userData;
     }
 
+    public void setUserData(int idx, String userData) {
+        this.userData[idx] = userData;
+    }
 }

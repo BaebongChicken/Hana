@@ -7,17 +7,21 @@ package com.example.hana.hana.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.hana.hana.Data.Hana;
 import com.example.hana.hana.Data.User;
 
 public class ContextUtil {
     private static final String PREFERENCE_NAME = "Hana";
     private static final String LOGGED_IN = "LOGGED_IN";
     private static final String USER_ID = "USER_ID";
+    private static final String HANA_ID = "HANA_ID";
+
     private static final String LAST_TEAM_ID = "LAST_TEAM_ID";
     private static final String USER_VALIDATE_KEY = "USER_VALIDATE_KEY";
     private static final String FB_SESSION = "FB_SESSION";
     private static User loginUser = null;
-//    private static ArrayList<TeamData> myTeamDataArrayList = null;
+    private static Hana loginHana = null;
+    //    private static ArrayList<TeamData> myTeamDataArrayList = null;
     public static int lastCategoryId;
 
     public static boolean isUserLoggedin(Context context) {
@@ -34,28 +38,75 @@ public class ContextUtil {
 
     }
 
-//
-//    public static void setUserData(Context context, UserData userData) {
-//        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
-//                Context.MODE_PRIVATE);
-//
-//        prefs.edit().putInt(USER_ID, userData.userId).commit();
-//        prefs.edit().putInt(LAST_TEAM_ID, userData.last_team).commit();
-//        prefs.edit().putString(USER_VALIDATE_KEY, userData.validate_key).commit();
-//        loginUser = userData;
-//    }
-//
-//    public static UserData getMyUserData(Context context) {
-//        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
-//                Context.MODE_PRIVATE);
-//        if (loginUser == null) {
-//            loginUser = new UserData();
-//            loginUser.userId = prefs.getInt(USER_ID, -1);
-//            loginUser.last_team = prefs.getInt(LAST_TEAM_ID, -1);
-//            loginUser.validate_key = prefs.getString(USER_VALIDATE_KEY, "");
-//        }
-//        return loginUser;
-//    }
+    //
+    public static void setLoginUser(Context context, User user) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+//        prefs.edit().putString(USER_ID, user.getUserData(0)).apply();
+        loginUser = user;
+    }
+
+    public static User getLoginUser(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        if (loginUser == null) {
+            loginUser = new User();
+            String[] emptyUserData = {"null", "null", "null", "null", "null"};
+            loginUser.setUserData(emptyUserData);
+        }
+        return loginUser;
+    }
+
+    public static void setLoginUserId(Context context, User user) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        prefs.edit().putString(USER_ID, user.getUserData(0)).apply();
+    }
+
+    public static String getLoginUserId(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        return prefs.getString(USER_ID, null);
+    }
+
+    public static void setLoginHana(Context context, Hana hana) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        prefs.edit().putString(HANA_ID, hana.getHanaData(0)).apply();
+        loginHana = hana;
+    }
+
+    public static Hana getLoginHana(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+        if (loginHana == null) {
+            loginHana = new Hana();
+            String[] emptyHanaData = {"null", "null", "null", "null"};
+            loginHana.setHanaData(emptyHanaData);
+        }
+        return loginHana;
+    }
+
+    public static void setLoginHanaId(Context context, Hana hana) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        prefs.edit().putString(HANA_ID, hana.getHanaData(0)).apply();
+    }
+
+    public static String getLoginHanaId(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        return prefs.getString(HANA_ID, null);
+    }
+
+
 //    public static void setLoginUserId(Context context, int userId) {
 //        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
 //                Context.MODE_PRIVATE);

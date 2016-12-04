@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="0dp">
+    <!--android:background="@color/custom_actionbar_background"-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+
+        <LinearLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/toggleBtnActionBar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="left|center_vertical"
+                android:scaleType="centerInside"
+
+                android:visibility="visible"
+                android:src="@drawable/menu_left_top"
+                android:elevation="1dp"
+                android:background="#0000" />
+
+            <TextView
+                android:id="@+id/titleTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/app_name"
+
+                android:textSize="20dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/okBtnActionBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="#0000"
+                android:scaleType="fitCenter"
+                android:text="OK"
+                android:visibility="gone"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</RelativeLayout>

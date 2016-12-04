@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.hana.hana.Constants.Constants;
+import com.example.hana.hana.Data.State;
 import com.example.hana.hana.Data.User;
 import com.example.hana.hana.DataBase.DataHandling;
 import com.example.hana.hana.DataBase.HanaSQLiteOpenHelper;
@@ -32,17 +33,17 @@ import java.util.Arrays;
 public class LoginActivity extends BaseActivity {
 
     CallbackManager callbackManager;
-    HanaSQLiteOpenHelper hanaDb;
-    private DataHandling dataHandling;
+    State state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
-        dataHandling = new DataHandling(getApplicationContext());
-        hanaDb = new HanaSQLiteOpenHelper(getApplicationContext());
+        findKeyHash();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
         ImageLoader.getInstance().init(config);
+        bindView();
+        init();
         startProperActivity();
 
         setContentView(R.layout.activity_login);
@@ -85,36 +86,43 @@ public class LoginActivity extends BaseActivity {
         );
 
 
-        /* key Hash 값 찾기
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.example.hana.hana", //앱의 패키지 명
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-        } catch (NoSuchAlgorithmException e) {
-        }*/
+    }
 
+    @Override
+    void bindView() {
+        super.bindView();
+        dataHandling = new DataHandling(getApplicationContext());
+        hanaDb = new HanaSQLiteOpenHelper(getApplicationContext());
+
+    }
+
+
+    void init() {
+        if (ContextUtil.isUserLoggedin(getApplicationContext())) {
+//            state = dataHandling.getState();
+            ContextUtil.setLoggedIn(getApplicationContext(), ContextUtil.isUserLoggedin(getApplicationContext()));
+            ContextUtil.setLoginUser(getApplicationContext(), dataHandling.getUserById(ContextUtil.getLoginUserId(getApplicationContext())));
+            ContextUtil.setLoginHana(getApplicationContext(), dataHandling.getHanaById(ContextUtil.getLoginHanaId(getApplicationContext())));
+        }
 
     }
 
     private void startProperActivity() {
-        if (ContextUtil.isUserLoggedin(getApplicationContext())) {
-            Intent mIntent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(mIntent);
-            finish();
+
+//        if (state.getUserLogin().equals("true")) {
+        if (ContextUtil.isUserLoggedin(LoginActivity.this)) {
+            if (ContextUtil.getLoginUserId(getApplicationContext()) != null && ContextUtil.getLoginHanaId(getApplicationContext()) != null) {
+                Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mIntent);
+                finish();
+            } else if(ContextUtil.getLoginUserId(getApplicationContext()) != null){
+                Intent mIntent = new Intent(LoginActivity.this, CreateHanaActivity.class);
+                startActivity(mIntent);
+                finish();
+            }
         } else {
             Log.d(Constants.LOG_TAG, "We need to sign up");
         }
-    }
-
-    private void addNewUser(String userId, String userName, String userPhone, String userThumbnailURL, String hanaId, String level) {
-        User user = new User(userId, userName, userPhone, userThumbnailURL, hanaId, level);
-        dataHandling.insert(user);
     }
 
 
@@ -128,15 +136,32 @@ public class LoginActivity extends BaseActivity {
                         try {
                             Log.d("GraphResponse", object.toString());
                             try {
+                                if (!ContextUtil.isUserLoggedin(getApplicationContext())) {
+                                    String mId = object.getString("id");
+                                    String mName = object.getString("name");
+                                    String mThumbNail = "https://graph.facebook.com/" + object.getString("id") + "/picture?type=normal";
 
-                                String mId = object.getString("id");
-                                String mName = object.getString("name");
-                                String mThumbNail = "https://graph.facebook.com/" + object.getString("id") + "/picture?type=normal";
-                                addNewUser(mId, mName, "", mThumbNail, "", "ADMIN");
-                                ContextUtil.setLoggedIn(getApplicationContext(), true);
-                                Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(mIntent);
-                                finish();
+                                    Log.d(Constants.LOG_TAG, "new User ADD");
+
+                                    ContextUtil.setLoggedIn(getApplicationContext(), true);
+//                                    state = new State("true", mId, "null");
+//                                    dataHandling.insert(state);
+                                    User mUser = addNewUser(mId, mName, "", mThumbNail, "", "ADMIN");
+                                    ContextUtil.setLoginUser(getApplicationContext(), mUser);
+                                    ContextUtil.setLoginUserId(getApplicationContext(), mUser);
+
+                                    Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.isUserLoggedin(LoginActivity.this));
+                                    Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginUser(LoginActivity.this));
+                                    Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginUserId(LoginActivity.this));
+                                    Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginHana(LoginActivity.this));
+                                    Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginHanaId(LoginActivity.this));
+
+                                    Intent mIntent = new Intent(LoginActivity.this, CreateHanaActivity.class);
+                                    startActivity(mIntent);
+                                    finish();
+                                } else {
+                                    ContextUtil.setLoggedIn(getApplicationContext(), false);
+                                }
                             } catch (Exception e) {
                                 Log.e(Constants.LOG_TAG, "error");
 
