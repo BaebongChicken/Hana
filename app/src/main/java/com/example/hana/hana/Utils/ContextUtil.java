@@ -16,6 +16,7 @@ public class ContextUtil {
     private static final String USER_ID = "USER_ID";
     private static final String HANA_ID = "HANA_ID";
     private static final String HANA_PATH = "HANA_PATH";
+    private static final String TEAM_ID = "TEAM_ID";
 
     private static final String LAST_TEAM_ID = "LAST_TEAM_ID";
     private static final String USER_VALIDATE_KEY = "USER_VALIDATE_KEY";
@@ -119,6 +120,20 @@ public class ContextUtil {
                 Context.MODE_PRIVATE);
 
         return prefs.getString(HANA_PATH, null);
+    }
+
+    public static void setLoginTeamId(Context context, String teamId) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        prefs.edit().putString(TEAM_ID, teamId).apply();
+    }
+
+    public static String getLoginTeamId(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREFERENCE_NAME,
+                Context.MODE_PRIVATE);
+
+        return prefs.getString(TEAM_ID, null);
     }
 
 //    public static void setLoginUserId(Context context, int userId) {

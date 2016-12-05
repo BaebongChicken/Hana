@@ -9,8 +9,9 @@ import com.example.hana.hana.DataBase.HanaDatabase;
  */
 
 public class Team {
-    final static int DATA_COUNT = 3;
+    final static int DATA_COUNT = 4;
     private String[] teamData;
+
     public Team() {
         this.teamData = null;
     }
@@ -22,11 +23,13 @@ public class Team {
 
     public Team(String teamId,
                 String teamName,
+                String memberId,
                 String hanaId) {
         teamData = new String[DATA_COUNT];
         teamData[0] = teamId;
         teamData[1] = teamName;
-        teamData[2] = hanaId;
+        teamData[2] = memberId;
+        teamData[3] = hanaId;
 
     }
 
@@ -39,13 +42,15 @@ public class Team {
 
         return values;
     }
+
     public String[] getTeamData() {
         return teamData;
     }
 
-    public String getTeamData(int idx){
+    public String getTeamData(int idx) {
         return teamData[idx];
     }
+
     public void setTeamData(String[] teamData) {
         this.teamData = teamData;
     }

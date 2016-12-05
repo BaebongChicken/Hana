@@ -10,10 +10,10 @@
     <!--android:background="@color/custom_actionbar_background"-->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryTextInv">
+        android:background="@color/colorPrimaryTextInv"
+        android:layout_height="41dp">
 
 
         <LinearLayout
@@ -69,6 +69,22 @@
 
 
     </FrameLayout>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryTextInv"
+        android:layout_height="2dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:background="@color/colorPrimaryText"
+        android:layout_height="2dp"
+        android:layout_above="@+id/textView2" />
 
 
 </RelativeLayout>

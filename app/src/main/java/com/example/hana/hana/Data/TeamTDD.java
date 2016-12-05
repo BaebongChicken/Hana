@@ -44,10 +44,14 @@ public class TeamTDD {
     }
 
     public String getTeamTddData(int idx){
-        return teamTddData[idx];
+        return this.teamTddData[idx];
     }
 
     public void setTeamTddData(String[] teamTddData){
         this.teamTddData =teamTddData;
+    }
+
+    public void setTeamTddData(int idx, String teamTddData){
+        this.teamTddData[idx] =teamTddData;
     }
 }

@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_create_hana"
+    android:id="@+id/activity_create_team"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.hana.hana.Activities.CreateHanaActivity">
+    tools:context="com.example.hana.hana.Activities.CreateTeamActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/custom_action_toolbar_createhana"
+        android:id="@+id/custom_action_toolbar_createteam"
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <FrameLayout
+            android:id="@+id/teamBackgrounlyt"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
             <ImageView
-                android:id="@+id/background_hana"
+                android:id="@+id/background_create_team"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
@@ -37,22 +35,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="하나의 이름"
+                    android:text="팀 또는 프로젝트 이름"
                     android:textColor="@color/colorPrimaryTextInv"
                     android:textSize="20dp" />
 
                 <EditText
-                    android:id="@+id/hanaNameTv"
+                    android:id="@+id/teamNameTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/frame_textview"
                     android:gravity="center"
-                    android:hint="이름을 입력 해 주세요"
+                    android:hint="팀명 또는 프로젝트 이름을 입력해주세요"
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/colorPrimaryTextInv"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -61,50 +60,18 @@
                     android:layout_marginTop="20dp"
                     android:background="@color/gray_line" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="하나의 대표사진"
-                    android:textColor="@color/colorPrimaryTextInv"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="아래를 클릭하여, 대표사진을 설정하세요"
-                    android:textColor="@color/colorSecondaryText"
-                    android:textSize="12dp" />
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/addPhotoLyt">
-
-                    <ImageView
-                        android:id="@+id/hanaThumbnailIv"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/frame_imgview"
-                        android:scaleType="centerCrop"
-                        android:layout_width="wrap_content"
-                        android:minHeight="500dp"
-                        android:minWidth="300dp" />
-                </FrameLayout>
-
                 <Button
-                    android:id="@+id/createHanaBtn"
+                    android:id="@+id/createMemberBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/frame_button_black_stroke"
-                    android:text="하나 만들기"
+                    android:background="@drawable/frame_button_white_stroke"
+                    android:text="멤버 추가하기"
+                    android:textColor="@color/colorPrimaryTextInv"
                     android:textSize="20dp" />
 
             </LinearLayout>
 
         </FrameLayout>
-
-    </ScrollView>
 
 </LinearLayout>

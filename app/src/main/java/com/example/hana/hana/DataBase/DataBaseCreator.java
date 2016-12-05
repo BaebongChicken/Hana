@@ -7,7 +7,7 @@ package com.example.hana.hana.DataBase;
 public interface DataBaseCreator {
 
     public static final String DB_NAME="hana_db";
-    public static final int DB_VERSION=1;
+    public static final int DB_VERSION=2;
 
     //Definition Statement
     public String[] getCreateTableStmt();

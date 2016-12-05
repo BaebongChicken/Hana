@@ -19,6 +19,8 @@ import com.example.hana.hana.DataBase.HanaDatabase.UserTable;
 
 import java.util.ArrayList;
 
+import static com.example.hana.hana.DataBase.HanaDatabase.TeamTDDTable.COL_TEAMTDD_ID;
+import static com.example.hana.hana.DataBase.HanaDatabase.TeamTable.COL_TEAM_ID;
 import static com.example.hana.hana.DataBase.HanaDatabase.UserTable.COL_HANA_ID;
 import static com.example.hana.hana.DataBase.HanaDatabase.UserTable.COL_USER_ID;
 
@@ -86,7 +88,7 @@ public class DataHandling {
     public void update(final User data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
 
-        db.update(HanaDatabase.UserTable.TABLE_NAME, data.getContentValues(), data.getUserData(0));
+        db.update(HanaDatabase.UserTable.TABLE_NAME, data.getContentValues(), Long.parseLong(data.getUserData(0)));
 
     }
 
@@ -103,13 +105,13 @@ public class DataHandling {
 
     public void update(final Team data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
-        db.update(HanaDatabase.TeamTable.TABLE_NAME, data.getContentValues(), data.getTeamData(0));
+        db.update(HanaDatabase.TeamTable.TABLE_NAME, data.getContentValues(), Long.parseLong(data.getTeamData(0)));
 
     }
 
     public void update(final TeamTDD data) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " update - " + data.toString());
-        db.update(HanaDatabase.TeamTDDTable.TABLE_NAME, data.getContentValues(), data.getTeamTddData(0));
+        db.update(HanaDatabase.TeamTDDTable.TABLE_NAME, data.getContentValues(), Long.parseLong(data.getTeamTddData(0)));
 
     }
 
@@ -126,13 +128,13 @@ public class DataHandling {
 
     //delete
 
-    public void delete(final User data, final int id) {
+    public void delete(final User data, final long id) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " delete - " + id);
         db.delete(HanaDatabase.UserTable.TABLE_NAME, id);
 
     }
 
-    public void delete(final Hana data, final int id) {
+    public void delete(final Hana data, final long id) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
         db.delete(HanaDatabase.HanaTable.TABLE_NAME, id);
     }
@@ -143,13 +145,13 @@ public class DataHandling {
 //
 //    }
 
-    public void delete(final Team data, final int id) {
+    public void delete(final Team data, final long id) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
         db.delete(HanaDatabase.TeamTable.TABLE_NAME, id);
 
     }
 
-    public void delete(final TeamTDD data, final int id) {
+    public void delete(final TeamTDD data, final long id) {
         Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " insert - " + id);
         db.delete(HanaDatabase.TeamTDDTable.TABLE_NAME, id);
 
@@ -225,6 +227,29 @@ public class DataHandling {
         return ret;
     }
 
+    public ArrayList<User> getListUserByTeamMemberIdArray(ArrayList<String> teamMemberIdArray) {
+        Cursor c = null;
+        ArrayList<User> ret = null;
+        int i;
+        for (i = 0; i < teamMemberIdArray.size(); i++) {
+            String sql = "SELECT * FROM " + UserTable.TABLE_NAME
+                    + " WHERE " + UserTable.COL_USER_ID + "=" + teamMemberIdArray.get(i);
+            try {
+                Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+                c = db.get(sql);
+                db.logCursorInfo(c);
+                ret = setBindCursorUser(c);
+            } catch (SQLiteException e) {
+                Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+            } finally {
+                if (c != null && c.isClosed()) {
+                    c.close();
+                }
+            }
+        }
+        return ret;
+    }
+
     public Hana getHanaById(String hanaId) {
         Cursor c = null;
         Hana mHana = null;
@@ -272,6 +297,33 @@ public class DataHandling {
         return ret;
     }
 
+    public Team getTeamById(String teamId) {
+        Cursor c = null;
+        Team mTeam = null;
+
+        ArrayList<Team> ret = new ArrayList<Team>();
+
+        String sql = "SELECT *" + " FROM " + TeamTable.TABLE_NAME + " WHERE " + COL_TEAM_ID + "=" + "'" + teamId + "'";
+
+        try {
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorTeam(c);
+            for (int i = 0; i < ret.size(); i++) {
+                if (teamId.equals(ret.get(i).getTeamData(0))) {
+                    mTeam = ret.get(i);
+                }
+            }
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return mTeam;
+    }
+
     public ArrayList<Team> getListTeam() {
         Cursor c = null;
         ArrayList<Team> ret = null;
@@ -291,10 +343,79 @@ public class DataHandling {
         return ret;
     }
 
+    public ArrayList<Team> getListTeamByHanaId(String hanaId) {
+        Cursor c = null;
+        ArrayList<Team> ret = null;
+//        String sql = "SELECT * FROM " + TeamTable.TABLE_NAME +" t,"+HanaTable.TABLE_NAME+ " h WHERE t."+TeamTable.COL_HANA_ID+"=h."+HanaTable.COL_HANA_ID +" and h."+HanaTable.COL_HANA_ID+"="+hanaId+" ORDER BY 1";
+        String sql = "SELECT * FROM " + TeamTable.TABLE_NAME + " WHERE " + TeamTable.COL_HANA_ID + "='" + hanaId + "' ORDER BY 1";
+
+        try {
+            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorTeam(c);
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return ret;
+    }
+
+    public TeamTDD getTeamTddById(String tddId) {
+        Cursor c = null;
+        TeamTDD mTeamTdd = null;
+
+        ArrayList<TeamTDD> ret = new ArrayList<>();
+
+        String sql = "SELECT *" + " FROM " + TeamTDDTable.TABLE_NAME + " WHERE " + COL_TEAMTDD_ID + "=" + "'" + tddId + "'";
+
+        try {
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorTeamTDD(c);
+            for (int i = 0; i < ret.size(); i++) {
+                if (tddId.equals(ret.get(i).getTeamTddData(0))) {
+                    mTeamTdd = ret.get(i);
+                }
+            }
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return mTeamTdd;
+    }
+
     public ArrayList<TeamTDD> getListTeamTdd() {
         Cursor c = null;
         ArrayList<TeamTDD> ret = null;
         String sql = "SELECT * FROM " + HanaDatabase.TeamTDDTable.TABLE_NAME + " ORDER BY 1";
+        try {
+            Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
+            c = db.get(sql);
+            db.logCursorInfo(c);
+            ret = setBindCursorTeamTDD(c);
+        } catch (SQLiteException e) {
+            Log.e(Constants.LOG_TAG, DataHandling.CLASSNAME + " getList ", e);
+        } finally {
+            if (c != null && c.isClosed()) {
+                c.close();
+            }
+        }
+        return ret;
+    }
+
+    public ArrayList<TeamTDD> getListTeamTDDByTeamId(String teamId) {
+        Cursor c = null;
+        ArrayList<TeamTDD> ret = null;
+//        String sql = "SELECT * FROM " + TeamTDDTable.TABLE_NAME +" tdd,"+TeamTable.TABLE_NAME+ " t WHERE tdd."+TeamTDDTable.COL_TEAM_ID+"=t."+TeamTable.COL_TEAM_ID +" and t."+TeamTable.COL_TEAM_ID+"="+teamId+" ORDER BY 1";
+        String sql = "SELECT * FROM " + TeamTDDTable.TABLE_NAME + " WHERE " + TeamTDDTable.COL_TEAM_ID + "='" + teamId + "' ORDER BY 1";
+
         try {
             Log.d(Constants.LOG_TAG, DataHandling.CLASSNAME + " get - ALL");
             c = db.get(sql);
@@ -378,14 +499,14 @@ public class DataHandling {
         return ret;
     }
 
-    private State setBindCursorState(final Cursor c) {
-        c.moveToFirst();
-        String[] mDatas = new String[3];
-        mDatas[0] = c.getString(c.getColumnIndex("USER_LOGIN"));
-        mDatas[1] = c.getString(c.getColumnIndex("CURRENT_USER_ID"));
-        mDatas[2] = c.getString(c.getColumnIndex("CURRENT_HANA_ID"));
-        State state = new State(mDatas);
-        return state;
-    }
+//    private State setBindCursorState(final Cursor c) {
+//        c.moveToFirst();
+//        String[] mDatas = new String[3];
+//        mDatas[0] = c.getString(c.getColumnIndex("USER_LOGIN"));
+//        mDatas[1] = c.getString(c.getColumnIndex("CURRENT_USER_ID"));
+//        mDatas[2] = c.getString(c.getColumnIndex("CURRENT_HANA_ID"));
+//        State state = new State(mDatas);
+//        return state;
+//    }
 
 }

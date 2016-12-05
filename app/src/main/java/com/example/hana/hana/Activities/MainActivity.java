@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hana.hana.Adapters.MemberAdapter;
+import com.example.hana.hana.Adapters.TeamAdapter;
 import com.example.hana.hana.Constants.Constants;
 import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.Data.User;
@@ -49,10 +50,12 @@ public class MainActivity extends BaseActivity {
     private ListView memberlv;
     private ArrayList<Team> teamArrayList;
     private ArrayList<User> memberArrayList;
+    private Button teamAddBtn;
 
     private ImageView background;
     //member
     private Button memberAddBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +70,10 @@ public class MainActivity extends BaseActivity {
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        setOnEvents();
+    public void onResume() {
+        super.onResume();
+        setMemberArrayList();
+        setTeamArrayList();
     }
 
     @Override
@@ -93,14 +97,16 @@ public class MainActivity extends BaseActivity {
         this.actTab = (TextView) findViewById(R.id.actTab);
         this.mainIndicator = (TextView) findViewById(R.id.mainIndicator);
         this.mainTab = (TextView) findViewById(R.id.mainTab);
-        this.background = (ImageView) findViewById(R.id.background_main);
-        //
+        this.background = (ImageView) findViewById(R.id.background);
+        //teamAct
         this.actlv = (ListView) findViewById(R.id.actlv);
-        this.memberlv = (ListView) findViewById(R.id.memberlv);
         this.teamArrayList = new ArrayList<Team>();
-        this.memberArrayList = new ArrayList<User>();
+        this.teamAddBtn = (Button) findViewById(R.id.teamAddBtn);
         //member
+        this.memberlv = (ListView) findViewById(R.id.memberlv);
+        this.memberArrayList = new ArrayList<User>();
         this.memberAddBtn = (Button) findViewById(R.id.memberAddBtn);
+
     }
 
     @Override
@@ -123,7 +129,6 @@ public class MainActivity extends BaseActivity {
     void setOnEvents() {
         super.setOnEvents();
         //title
-        int index = 0;
         String currentHanaName = ContextUtil.getLoginHana(MainActivity.this).getHanaData(1);
         titleTxt.setText(currentHanaName);
         //tab
@@ -172,10 +177,17 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-
+        teamAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateTeamActivity.class);
+                startActivity(intent);
+            }
+        });
         setMemberArrayList();
-
+        setTeamArrayList();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -192,11 +204,19 @@ public class MainActivity extends BaseActivity {
     void setMemberArrayList() {
         memberArrayList = dataHandling.getListUser();
 
-        MemberAdapter mAdapter = new MemberAdapter(MainActivity.this, getLayoutInflater(), memberArrayList);
-        memberlv.setAdapter(mAdapter);
+        MemberAdapter memberAdapter = new MemberAdapter(MainActivity.this, getLayoutInflater(), memberArrayList);
+        memberlv.setAdapter(memberAdapter);
         setListViewHeightBasedOnItems(memberlv);
     }
 
+    void setTeamArrayList() {
+        teamArrayList = dataHandling.getListTeam();
+
+        TeamAdapter teamAdapter = new TeamAdapter(MainActivity.this, getLayoutInflater(), teamArrayList);
+        actlv.setAdapter(teamAdapter);
+        setListViewHeightBasedOnItems(actlv);
+
+    }
 
     void openOrCloseSideMenu() {
 //왼쪽 사이드바 열고 닫는 함수
@@ -222,7 +242,7 @@ public class MainActivity extends BaseActivity {
 
 
     //함수화 시킨것들
-    void setIndicators(int pos) {
+    private void setIndicators(int pos) {
         switch (pos) {
             case 0:
                 mainIndicator.setBackgroundColor(getResources().getColor(R.color.indicator_active));

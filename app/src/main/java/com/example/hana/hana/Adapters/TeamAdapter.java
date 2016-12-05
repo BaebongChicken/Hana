@@ -5,20 +5,18 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hana.hana.Activities.MainActivity;
-import com.example.hana.hana.Data.User;
+import com.example.hana.hana.Activities.TDDActivity;
+import com.example.hana.hana.Data.Team;
 import com.example.hana.hana.DataBase.DataHandling;
 import com.example.hana.hana.R;
+import com.example.hana.hana.Utils.ContextUtil;
 
 import java.util.ArrayList;
 
@@ -26,11 +24,12 @@ import java.util.ArrayList;
  * Created by Jin Hee Lee on 2016-12-05.
  */
 
-public class MemberAdapter extends BaseAdapter {
-    ArrayList<User> datas;
+public class TeamAdapter extends BaseAdapter {
+    ArrayList<Team> datas;
     LayoutInflater inflater;
     private Context context;
-    public MemberAdapter(Context context, LayoutInflater inflater, ArrayList<User> datas) {
+
+    public TeamAdapter(Context context, LayoutInflater inflater, ArrayList<Team> datas) {
         this.datas = datas;
         this.inflater = inflater;
         this.context = context;
@@ -48,45 +47,32 @@ public class MemberAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        long mId = Long.parseLong(datas.get(position).getUserData(0));
+        long mId = Long.parseLong(datas.get(position).getTeamData(0));
         return mId;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_memberview, parent, false);
+            convertView = inflater.inflate(R.layout.list_teamview, parent, false);
         }
-        TextView memberId = (TextView) convertView.findViewById(R.id.memberId);
-        TextView memberName = (TextView) convertView.findViewById(R.id.memberName);
-        TextView memberPhone = (TextView) convertView.findViewById(R.id.memberPhone);
-        TextView memberLevel = (TextView) convertView.findViewById(R.id.memberLevel);
-        ImageView memberCall = (ImageView) convertView.findViewById(R.id.memberCall);
+        TextView teamId = (TextView) convertView.findViewById(R.id.teamId);
+        TextView teamName = (TextView) convertView.findViewById(R.id.teamName);
 
-        memberId.setText(datas.get(position).getUserData(0));
-        memberName.setText(datas.get(position).getUserData(1));
-        memberPhone.setText(datas.get(position).getUserData(2));
-        memberLevel.setText(datas.get(position).getUserData(5));
-        memberCall.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
-        memberCall.setOnClickListener(new View.OnClickListener() {
+
+        teamId.setText(datas.get(position).getTeamData(0));
+        teamName.setText(datas.get(position).getTeamData(1));
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+datas.get(position).getUserData(2)));
+                ContextUtil.setLoginTeamId(context, datas.get(position).getTeamData(0) );
+                Intent intent = new Intent(context, TDDActivity.class);
                 context.startActivity(intent);
             }
         });
-        if (memberLevel.getText().toString().equals("ADMIN")){
-            memberPhone.setVisibility(View.GONE);
-            memberId.setVisibility(View.GONE);
-            memberCall.setVisibility(View.GONE);
-            memberLevel.setTextColor(Color.parseColor("#FF5588"));
-        }
-
-
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
 
 
                 DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
@@ -100,19 +86,20 @@ public class MemberAdapter extends BaseAdapter {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DataHandling dataHandling = new DataHandling(context);
-                        dataHandling.delete(dataHandling.getUserById(datas.get(position).getUserData(0)), Long.parseLong(datas.get(position).getUserData(0)));
-                        ((MainActivity)context).onResume();
+                        dataHandling.delete(dataHandling.getTeamById(datas.get(position).getTeamData(0)), Long.parseLong(datas.get(position).getTeamData(0)));
+                        ((MainActivity) context).onResume();
                         dialog.dismiss();
                     }
                 };
                 new AlertDialog.Builder(context)
-                        .setTitle("해당 멤버를 삭제하시겠습니까?")
+                        .setTitle("해당 팀을 삭제하시겠습니까?")
                         .setPositiveButton("취소", cancelListener)
                         .setNegativeButton("삭제", deleteListener)
                         .show();
                 return false;
             }
         });
+
         return convertView;
     }
 }

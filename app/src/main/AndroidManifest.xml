@@ -28,7 +28,9 @@
         </activity>
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.CreateHanaActivity" />
-        <activity android:name=".Activities.CreateMemberActivity"></activity>
+        <activity android:name=".Activities.CreateMemberActivity" />
+        <activity android:name=".Activities.CreateTeamActivity" />
+        <activity android:name=".Activities.TDDActivity"></activity>
     </application>
 
 </manifest>

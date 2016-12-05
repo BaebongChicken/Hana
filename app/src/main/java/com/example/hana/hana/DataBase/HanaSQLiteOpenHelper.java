@@ -141,7 +141,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
     @return (int)
      */
     public int update(String table, ContentValues values, long id) {
-        return db.update(table, values, KEY_COLUMN + "=" + id, null);
+        return db.update(table, values, table + KEY_COLUMN + "=" + id, null);
     }
 
     /*
@@ -171,7 +171,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
     @return (int)
      */
     public int delete(String table, long id) {
-        return db.delete(table, KEY_COLUMN + "=" + id, null);
+        return db.delete(table, table + KEY_COLUMN + "=" + id, null);
     }
 
     /*
@@ -253,7 +253,7 @@ public class HanaSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME+" - onUpgrade() : Table Upgrade Action");
+        Log.d(Constants.LOG_TAG, HanaSQLiteOpenHelper.CLASSNAME + " - onUpgrade() : Table Upgrade Action");
         db.execSQL("DROP TABLE IF EXTISTS data");
         onCreate(db);
     }

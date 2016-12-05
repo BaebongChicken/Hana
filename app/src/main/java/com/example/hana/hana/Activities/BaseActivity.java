@@ -32,6 +32,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hana.hana.Data.Hana;
+import com.example.hana.hana.Data.Team;
+import com.example.hana.hana.Data.TeamTDD;
 import com.example.hana.hana.Data.User;
 import com.example.hana.hana.DataBase.DataHandling;
 import com.example.hana.hana.DataBase.HanaSQLiteOpenHelper;
@@ -222,7 +224,7 @@ public class BaseActivity extends AppCompatActivity {
 
     void setBackground(ImageView background, String imgUri) {
 
-        ImageLoader.getInstance().displayImage("file://"+imgUri, background, new ImageLoadingListener() {
+        ImageLoader.getInstance().displayImage("file://" + imgUri, background, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
 
@@ -259,6 +261,19 @@ public class BaseActivity extends AppCompatActivity {
         Hana hana = new Hana(hanaId, hanaName, hanaThumbnail, hanaLevelList);
         dataHandling.insert(hana);
         return hana;
+
+    }
+
+    protected Team addNewTeam(String teamId, String teamName, String memberId, String hanaId) {
+        Team team = new Team(teamId, teamName, memberId, hanaId);
+        dataHandling.insert(team);
+        return team;
+    }
+
+    protected TeamTDD addNewTDD(String tddId, String content, String state, String teamId) {
+        TeamTDD teamTDD = new TeamTDD(tddId, content, state, teamId);
+        dataHandling.insert(teamTDD);
+        return teamTDD;
 
     }
 }

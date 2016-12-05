@@ -85,7 +85,7 @@ public class CreateHanaActivity extends BaseActivity {
         this.hanaThumbnailIv = (ImageView) findViewById(R.id.hanaThumbnailIv);
         this.hanaNameTv = (EditText) findViewById(R.id.hanaNameTv);
         this.addPhotolyt = (FrameLayout) findViewById(R.id.addPhotoLyt);
-        this.background = (ImageView) findViewById(R.id.background_main);
+        this.background = (ImageView) findViewById(R.id.background_hana);
     }
 
     @Override

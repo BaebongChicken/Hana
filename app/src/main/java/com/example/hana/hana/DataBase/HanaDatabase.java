@@ -94,6 +94,7 @@ public class HanaDatabase {
         public static final String TABLE_NAME = "TEAM";
         public static final String COL_TEAM_ID = "teamId";
         public static final String COL_TEAM_NAME = "teamName";
+        public static final String COL_TEAM_MEMBER_ID = "memberId";
         public static final String COL_HANA_ID = "hanaId";
 
 
@@ -102,6 +103,7 @@ public class HanaDatabase {
                     {
                             COL_TEAM_ID,
                             COL_TEAM_NAME,
+                            COL_TEAM_MEMBER_ID,
                             COL_HANA_ID
                     };
             return COLUMNS;
@@ -116,7 +118,7 @@ public class HanaDatabase {
         private TeamTDDTable() {
         }
 
-        public static final String TABLE_NAME = "TEAM_TDD";
+        public static final String TABLE_NAME = "TEAMTDD";
         public static final String COL_TEAMTDD_ID = "teamTddId";
         public static final String COL_TEAMTDD_CONTENT = "content";
         public static final String COL_TEAMTDD_STATE = "state";

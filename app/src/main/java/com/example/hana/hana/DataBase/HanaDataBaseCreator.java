@@ -40,7 +40,7 @@ public class HanaDataBaseCreator implements DataBaseCreator {
 
     private final String INDEX_CREATE_HANA_TABLE = "CREATE UNIQUE INDEX "
             + HanaTable.TABLE_NAME + "_pk ON "
-            + HanaTable.TABLE_NAME + " (" + UserTable.COL_HANA_ID + ");";
+            + HanaTable.TABLE_NAME + " (" + HanaTable.COL_HANA_ID + ");";
     //    //
 //    //ACTBRANCH
 //    //
@@ -60,6 +60,7 @@ public class HanaDataBaseCreator implements DataBaseCreator {
             TeamTable.TABLE_NAME + "("
             + TeamTable.COL_TEAM_ID + " INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
             + TeamTable.COL_TEAM_NAME + " TEXT,"
+            + TeamTable.COL_TEAM_MEMBER_ID + " TEXT,"
             + TeamTable.COL_HANA_ID + " INTEGER);";
 
     private final String INDEX_CREATE_TEAM_TABLE = "CREATE UNIQUE INDEX "

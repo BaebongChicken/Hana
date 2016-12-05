@@ -25,7 +25,7 @@
 
 
             <ImageView
-                android:id="@+id/background_main"
+                android:id="@+id/background_create_member"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
@@ -54,7 +54,8 @@
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/colorPrimaryTextInv"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -81,7 +82,8 @@
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/colorPrimaryTextInv"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -108,7 +110,9 @@
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/colorPrimaryTextInv"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:singleLine="true"
+                    android:phoneNumber="true" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -134,7 +138,8 @@
                     android:maxLines="1"
                     android:padding="5dp"
                     android:textColor="@color/colorPrimaryTextInv"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:singleLine="true" />
 
                 <TextView
                     android:layout_width="match_parent"

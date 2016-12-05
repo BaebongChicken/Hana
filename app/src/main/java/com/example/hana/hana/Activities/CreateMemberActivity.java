@@ -54,7 +54,7 @@ public class CreateMemberActivity extends BaseActivity {
         this.memberPhoneTv = (EditText) findViewById(R.id.memberPhoneTv);
         this.memberNameTv = (EditText) findViewById(R.id.memberNameTv);
         this.memberIdTv = (EditText) findViewById(R.id.memberIdTv);
-        this.background = (ImageView) findViewById(R.id.background_main);
+        this.background = (ImageView) findViewById(R.id.background_create_member);
         this.customactiontoolbarcreatemember = (Toolbar) findViewById(R.id.custom_action_toolbar_createmember);
     }
 
