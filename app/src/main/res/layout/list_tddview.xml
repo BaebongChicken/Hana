@@ -10,15 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimaryTextInv"
         android:orientation="horizontal">
 
         <FrameLayout
             android:id="@+id/prevBtn"
-            android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:paddingLeft="2dp">
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="35dp">
 
             <Button
                 android:layout_width="20dp"
@@ -36,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/frame_listview"
+            android:background="@drawable/frame_imgview"
             android:gravity="center_vertical"
             android:minHeight="100dp"
             android:padding="10dp"
@@ -45,10 +44,10 @@
 
         <FrameLayout
             android:id="@+id/nextBtn"
-            android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:paddingRight="2dp">
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:layout_width="35dp">
 
             <Button
                 android:layout_width="20dp"

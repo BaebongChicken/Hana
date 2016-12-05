@@ -61,7 +61,7 @@ public class CreateHanaActivity extends BaseActivity {
 
         setCustomActionbar(R.id.custom_action_toolbar_createhana);
         bindView();
-        setBackground(background);
+        setBackground(background,ContextUtil.getHanaImagePath(CreateHanaActivity.this));
         setOnEvents();
 
 

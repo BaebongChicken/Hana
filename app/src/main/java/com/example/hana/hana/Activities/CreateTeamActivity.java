@@ -30,7 +30,7 @@ public class CreateTeamActivity extends BaseActivity {
         setContentView(R.layout.activity_create_team);
         setCustomActionbar(R.id.custom_action_toolbar_createteam);
         bindView();
-        setBackground(backgroundcreateteam);
+        setBackground(backgroundcreateteam,ContextUtil.getHanaImagePath(CreateTeamActivity.this));
         setOnEvents();
     }
 

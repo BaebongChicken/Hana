@@ -146,8 +146,15 @@
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="main" />
+                                android:layout_height="250dp"
+                                android:id="@+id/mainTextView"
+                                android:padding="50dp"
+                                android:background="@drawable/frame_button_white_stroke"
+                                android:paddingLeft="20dp"
+                                android:paddingRight="20dp"
+                                android:textColor="@color/colorPrimaryTextInv"
+                                android:textSize="24sp"
+                                android:layout_margin="10dp" />
                         </LinearLayout>
 
                         <LinearLayout

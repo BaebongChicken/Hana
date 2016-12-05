@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
     private LinearLayout memberLayout;
     private TextView myProfileTxt;
     private LinearLayout profileLayout;
+    private TextView mainTextView;
     private ListView actlv;
     private ListView memberlv;
     private ArrayList<Team> teamArrayList;
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity {
         super.bindView();
         dataHandling = new DataHandling(getApplicationContext());
         hanaDb = new HanaSQLiteOpenHelper(getApplicationContext());
+        this.mainTextView = (TextView)findViewById(R.id.mainTextView);
         this.mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
         this.dlactivitymaindrawer = (DrawerLayout) findViewById(R.id.dl_activity_main_drawer);
         this.drawLayout = (LinearLayout) findViewById(R.id.drawLayout);
@@ -117,7 +119,7 @@ public class MainActivity extends BaseActivity {
         Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginUserId(MainActivity.this));
         Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginHana(MainActivity.this));
         Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginHanaId(MainActivity.this));
-
+        mainTextView.setText(""+ContextUtil.getLoginUser(MainActivity.this).getUserData(1)+"님! \nHANA에 오신 것을 환영합니다!");
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter();
         mainViewPager.setAdapter(mainViewPagerAdapter);
         mainViewPager.setOffscreenPageLimit(2);

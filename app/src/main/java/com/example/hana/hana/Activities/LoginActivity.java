@@ -98,18 +98,17 @@ public class LoginActivity extends BaseActivity {
 
 
     void init() {
-        if (ContextUtil.isUserLoggedin(getApplicationContext())) {
-//            state = dataHandling.getState();
-            ContextUtil.setLoggedIn(getApplicationContext(), ContextUtil.isUserLoggedin(getApplicationContext()));
-            ContextUtil.setLoginUser(getApplicationContext(), dataHandling.getUserById(ContextUtil.getLoginUserId(getApplicationContext())));
-            ContextUtil.setLoginHana(getApplicationContext(), dataHandling.getHanaById(ContextUtil.getLoginHanaId(getApplicationContext())));
+        if (dataHandling.getListUser().size()!=0) {
+            ContextUtil.setLoggedIn(getApplicationContext(), true);
+            Log.d(Constants.LOG_TAG,dataHandling.getListUser().get(dataHandling.getListUser().size()-1).getUserData(1)+"<-LoginUser(firstUser)");
+            ContextUtil.setLoginUser(getApplicationContext(), dataHandling.getListUser().get(dataHandling.getListUser().size()-1));
+            ContextUtil.setLoginHana(getApplicationContext(), dataHandling.getHanaById("1"));
         }
 
     }
 
     private void startProperActivity() {
 
-//        if (state.getUserLogin().equals("true")) {
         if (ContextUtil.isUserLoggedin(LoginActivity.this)) {
             if (ContextUtil.getLoginUserId(getApplicationContext()) != null && ContextUtil.getLoginHanaId(getApplicationContext()) != null) {
                 Intent mIntent = new Intent(LoginActivity.this, MainActivity.class);
@@ -143,12 +142,12 @@ public class LoginActivity extends BaseActivity {
 
                                     Log.d(Constants.LOG_TAG, "new User ADD");
 
-                                    ContextUtil.setLoggedIn(getApplicationContext(), true);
+                                    ContextUtil.setLoggedIn(LoginActivity.this, true);
 //                                    state = new State("true", mId, "null");
 //                                    dataHandling.insert(state);
                                     User mUser = addNewUser(mId, mName, "", mThumbNail, "", "ADMIN");
-                                    ContextUtil.setLoginUser(getApplicationContext(), mUser);
-                                    ContextUtil.setLoginUserId(getApplicationContext(), mUser);
+                                    ContextUtil.setLoginUser(LoginActivity.this, mUser);
+                                    ContextUtil.setLoginUserId(LoginActivity.this, mUser);
 
                                     Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.isUserLoggedin(LoginActivity.this));
                                     Log.d(Constants.LOG_TAG, "start state : " + ContextUtil.getLoginUser(LoginActivity.this));

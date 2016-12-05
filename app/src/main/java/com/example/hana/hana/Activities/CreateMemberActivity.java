@@ -31,7 +31,8 @@ public class CreateMemberActivity extends BaseActivity {
         setContentView(R.layout.activity_create_member);
         setCustomActionbar(R.id.custom_action_toolbar_createmember);
         bindView();
-        setBackground(this.background);
+        setBackground(this.background,ContextUtil.getHanaImagePath(CreateMemberActivity.this));
+
         setOnEvents();
     }
 

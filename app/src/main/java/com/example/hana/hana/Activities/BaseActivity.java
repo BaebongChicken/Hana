@@ -239,7 +239,7 @@ public class BaseActivity extends AppCompatActivity {
             public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                 Drawable drawable = new BitmapDrawable(loadedImage);
                 view.setBackground(drawable);
-                ((ImageView) view).setColorFilter(Color.parseColor("#BDBDBD"), PorterDuff.Mode.MULTIPLY);
+                ((ImageView) view).setColorFilter(Color.parseColor("#ACACAC"), PorterDuff.Mode.MULTIPLY);
 
             }
 

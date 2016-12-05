@@ -64,6 +64,8 @@ public class TDDActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tdd);
         bindView();
+        setBackground(this.backgroundtdd, ContextUtil.getHanaImagePath(TDDActivity.this));
+
         setCustomActionbar(R.id.custom_action_toolbar_tdd);
         setValues();
         setOnEvents();
@@ -199,7 +201,7 @@ public class TDDActivity extends BaseActivity {
         };
         new AlertDialog.Builder(TDDActivity.this)
                 .setView(edittext)
-                .setTitle("To do 추가하기")
+                .setTitle("To do 추가하기\n")
                 .setPositiveButton("취소", cancelListener)
                 .setNegativeButton("입력", submitListener)
                 .show();
